@@ -1,0 +1,13 @@
+3/10/25
+
+I wanted to keep track of some debugging methods so I could see why soemthing works and somethig doesnt. Once the
+project is done and I'm cmfortable with the outcome, then I'll delete this file. But my goal with this 
+is to keep me on track with the errors that keep comming up. 
+ 
+ 9:11pm 
+I spent a while trying to figure out why it wouldn't work with PostgreSQL. 
+I kept getting a 'logged out' message, and eventually realized it wasn't connecting. 
+After uninstalling and reinstalling several times, I got frustrated and didn't want to risk it not
+ working again. So, I asked ChatGPT for help on how to make the .env file point to a different 
+ directory. After adding it to the server.js file, I got it connecting to PostgreSQL 👏
+

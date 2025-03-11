@@ -1,3 +1,25 @@
+3/11/25 
+
+12:24am (yes AM I couldn't sleep and was excited about the project.)
+I decided to do some more navigating to see what I had in the files-> more specifically the public files. 
+I ended up finding pictures I wouldnt need and realized I would need to create a favicon as well. I'll
+worry about that down the line and create a "add down the line" section 
+
+
+anyways i figured for right now I might want a database like the follows
+
+Users           books               genre          staff 
+fname                                               role
+lname                                               (someone can be both a customer and staff)
+birthday
+city
+address(?)
+role
+
+
+
+
+
 3/10/25
 
 I wanted to keep track of some debugging methods so I could see why soemthing works and something doesnt. Once the
@@ -11,3 +33,16 @@ After uninstalling and reinstalling several times, I got frustrated and didn't w
  working again. So, I asked ChatGPT for help on how to make the .env file point to a different 
  directory. After adding it to the server.js file, I got it connecting to PostgreSQL 👏
 
+earlier before 9:11pm
+I had setting up issues that I cant recall right now, but I know it got resolved. I think it was mainly 
+ensuring I had installed everything I needed correctly. 
+
+Goal:                                                 Add down the line
+Have one functional page working                    -Favicon 
+figure out color scheme                             -
+find images for "library" with                      -
+genre:                                              -
+Fiction                                             -
+non fiction                                         -
+YA                                                  -
+Children                                            - 

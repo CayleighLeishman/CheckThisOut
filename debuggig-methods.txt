@@ -1,6 +1,6 @@
 3/10/25
 
-I wanted to keep track of some debugging methods so I could see why soemthing works and somethig doesnt. Once the
+I wanted to keep track of some debugging methods so I could see why soemthing works and something doesnt. Once the
 project is done and I'm cmfortable with the outcome, then I'll delete this file. But my goal with this 
 is to keep me on track with the errors that keep comming up. 
  

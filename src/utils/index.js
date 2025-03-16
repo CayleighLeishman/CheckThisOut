@@ -46,8 +46,22 @@ const configureStaticPaths = (app) => {
  *
  * @returns {string} The navigation menu.
  */
+
 const getNav = () => {
-    return 'This feature is not implemented yet.';
+    return 
+    console.log('src/utils/index.js: getNav()');
+    `<nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/genre"></a>Genre</li> 
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>`;
+
 }
 
 export { configureStaticPaths, getNav };

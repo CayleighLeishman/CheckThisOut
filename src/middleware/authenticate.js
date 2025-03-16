@@ -1,0 +1,1 @@
+// meant for authentication to determine if a guest or 

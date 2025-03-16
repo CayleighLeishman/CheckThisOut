@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 import { testDatabase } from './src/models/index.js';
 
 //To guide .env to postgress
-//Because I  got really tired of reinstalling and uninstalling postgress (SOO TIMES MAN.)
+//Because I  got really annoyed and tired of reinstalling and uninstalling postgress (SOO TIMES MAN.)
 import dotenv from 'dotenv';
 dotenv.config();
 const myAppPath = process.env.MY_APP_PATH;
@@ -30,10 +30,8 @@ const port = process.env.PORT;
 
 /**
  * Create and configure the Express server
- */
+*/
 const app = express();
-
-
 
 // Configure the application based on environment settings
 app.use(configNodeEnv);

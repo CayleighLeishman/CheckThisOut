@@ -1,3 +1,101 @@
+3/15/25
+
+I know this is low priority but I was really annoyed by the lack of logo,
+so I added the logo. It's pretty big so I'll have to readjust the size, but I'll worry about that
+once I get the routes working. (I added logo in the src/partials/header)
+
+Also before that I did play with the footter just to test things out, and it worked great! the code is conencting
+properly
+
+I just need to figure out the routes stuff now
+
+I also used chatgbt to work ont the getNav so that I could have links to get becaus eI was getting stuck but we need a nav 
+to navigate to different pages
+
+I created the getNav,and i know its the right place to put it, but its not showing, but I'm going to explore the server.js and see
+if i can detemrine what navHtml is set as.
+
+2 hours later 
+I figured out that the import in server.js was set as "mport configNodeEnv from './src/middleware/node-env.js'; " but in the 
+src/middleware/node-env it was set as configureNodeEnvironemtn." so i did a search for both "configureNodeEnvironement" and "configNodeEnv" through 
+all files in visual studio code for tCheckThisOut folder and dint find any other implementations fo the code so I just changed the npde-env.js file to 
+represnt whats in the import statement. 
+
+ I checked out consol log and it returned a favicon 404 error so I added in a favicon
+  that I just exported to the public/images folder. now the consol log shows no errors 
+  but I have consol.log showing so i'm going to double check why I'm not seeing any logs w
+  when something should be showing. 
+
+okay so i need to write consol.log() in .js files to see what's running and whats not tomorrow. I really want to keep working on it because I feel like
+I'm on a roll, however, i'm also gettign tired and I have church so I'll take care of this after church and just bring my laptop to the family dinner so if I'm not chatty with 
+someone I can code. 
+
+3/14/2025
+
+haven't touched it in a couple days, but heres what the professor suggested before I forget
+
+Get URL and routes working. Dont add POSTS (stuff within functions) 
+Just write the egining of functions 
+
+once url's are working then worry about getting the db and things set up
+
+after That then work on geting CSS 
+
+4:12 added routes to the src/routes/index.js page.\
+
+added authenticate.js in src/middleware. I'm not sure if that's a good idea but I'll worry about it later.
+
+added 
+
+/*******************************
+ *    [focus page]         *
+ *******************************/
+
+to hopefully make it easier to read down the line we'll see
+
+
+
+
+3/12/2025
+
+3:25
+In class: discussed with the professor different databses I should consider adding to postgress
+Some suggestions he made:
+
+book                
+    id
+    title
+    author
+    genre (FK from Genre)
+
+users       
+    id
+    fname
+    lname
+    email(this will also be their username)
+
+review
+    book id (FK)
+    user id (fk)
+    review (needs to be editable)
+
+role   
+    id (fk)
+    roles
+    
+genre   
+    id 
+    genre (10+, teens, ya, newadult, ect)
+    bookid (fk)
+
+
+checkout
+    quantity
+    bookid 
+    (combine book id and user id? I'll have to clarify with professor)
+
+
+
 3/11/25 
 
 12:24am (yes AM I couldn't sleep and was excited about the project.)
@@ -15,8 +113,6 @@ birthday
 city
 address(?)
 role
-
-
 
 
 

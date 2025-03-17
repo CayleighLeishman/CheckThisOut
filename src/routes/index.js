@@ -1,25 +1,25 @@
 import { Router } from 'express';
-
 const router = Router();
  
 /*******************************
  *         Home Page           *
  *******************************/
 router.get('/', async (req, res) => {
+    console.log('src/routes/index.js home page:line 8');
     res.render('index', { title: 'Home Page' });
 });
 
 /*******************************
  *         Login           *
  *******************************/
-
 router.get('/login', async (req,res) =>{
+    console.log('src/routes/index.js login page:line 16');
     res.render('login', {title: 'Login Page' });
-
 });
 
 router.post('/login', async (req, res) => {
     // Handle login logic here
+    
 });
 
 // logged out
@@ -39,7 +39,7 @@ router.post('/signup', async (req, res) => {
 });
 
 /*******************************
- *   User Profile/dashboard    *
+ *   User Profile Or Dashboard    *
  *******************************/
 router.get('/profile', async (req, res) => {
     res.render('profile', { title: 'User Profile' });

@@ -23,7 +23,8 @@ const configureStaticPaths = (app) => {
     
     staticPaths.forEach((pathConfig) => {
         const pathKey = typeof pathConfig === 'string' ? pathConfig : pathConfig.route;
-        
+        console.log('src/utils/index.js');
+
         if (!registeredPaths.has(pathKey)) {
             registeredPaths.add(pathKey);
             
@@ -47,6 +48,7 @@ const configureStaticPaths = (app) => {
  * @returns {string} The navigation menu.
  */
 
+console.log('src/utils/index.js: before getNav()');
 const getNav = () => {
     return 
     console.log('src/utils/index.js: getNav()');

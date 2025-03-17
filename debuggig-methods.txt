@@ -1,3 +1,87 @@
+3/17/25
+
+Okay Im giving up, I decided to see if maybe i didn't install everything and it turns out
+ I forgot to install express, ejs path (Facepalm.) So I'm installing that now, and we'll 
+ if that fixes things, or iff I missed something else (which I''m sure I did.)
+
+okay this installation is taking a while its a little anoying 
+
+its fine, I'm just going to review the code and see what else i could be missing out
+besides the installation process.
+
+okay  everyhthing is working but I had a feeling to comment out some code. 
+The only reason i had the code was because (I had an error that I can't remmeber entirely rn,) something about the page not loading
+I suspected the server.js wasn't connecting to env file so in the server.js I added 
+___
+server.js:
+//To guide .env to postgress
+//Because I  got really annoyed and tired of reinstalling and uninstalling postgress (SOO TIMES MAN.)
+import dotenv from 'dotenv';
+dotenv.config();
+const myAppPath = process.env.MY_APP_PATH;
+const dbUrl = process.env.DB_URL.replace('${MY_APP_PATH}', myAppPath);
+console.log(dbUrl); 
+___
+
+This I know was to create a variable that would work in .env that would help redirect it to postgres. It had seemed to workwhen 
+i in putted it then but now that I installed express path i think that it's now working without it. 
+So I reverted the .env file to how i thought it was supposed to be: 
+___
+.env file before (why i had above code in server.js): 
+
+MY_APP_PATH=C:\Users\cayle\AppData\Local\Programs
+DB_URL=postgresql://leishman42622:238242622@143.198.247.195:5432/${MY_APP_PATH} // and i declared the {MY_APP_PATH} in server.js
+NODE_ENV=development
+PORT=3000
+____ 
+
+.env file after (after i deleted the code in server.js and fixed up .env)
+
+MY_APP_PATH=C:\Users\cayle\AppData\Local\Programs
+DB_URL=postgresql://leishman42622:238242622@143.198.247.195:5432/C:\Users\cayle\AppData\Local\Programs
+NODE_ENV=development
+PORT=3000
+ 
+____
+
+after taking this code out nothing seemed to be different, so I'm not entirely sure why it seemed to work when I put it in but 
+dont need it now. 
+
+11:15
+
+I noticed in the .env I seemed to have forward and back slashes:
+ex:  
+DB_URL=postgresql://leishman42622:238242622@143.198.247.195:5432/C:\Users\cayle\AppData\Local\Programs
+
+so I changed it to this: 
+DB_URL=postgresql://leishman42622:238242622@143.198.247.195:5432/C:\Users\cayle\AppData\Local\Programs
+
+11:25 wsa editing debugging method to hopefully make sense later down then line if I need to review it and so I could figure 
+out what the heck i did the last few minutes. 
+
+I checked the getNav in the utils folder and the get nav is defined. But I can't tell what I'm missing. 
+ 
+ 11:28 I'm going to end it here for now because I have some stuff to take care of but this is going to be in th eback of my midn all day
+
+3/16/2025
+1:00
+just looking over code and reviewing how to work consol.log("print")
+
+I ended up using chat to talk about the databse lol. I need to focus on the routers, so I'm going to close all the files I had up and
+try to have  fresh start so I can gauge what I'm missing. Something is not connecting. 
+ 
+So far I've noticed:
+
+i dont have Homeroute in src/routes/index.js but the server is trying to import a HomeRoute. That could be the missing link, a
+I'm looking into it now. 
+
+2:13
+never mind I misunderstood the code. it runs in the server, but it actually imports (puts in server.js) what was
+exported ("pushed out") from src/routes/index.  no bug there, but press on! My battery is low an dI left the charger at 
+home in rexburg, but I'm in pocatello. I'll do what I can.
+
+
+
 3/15/25
 
 I know this is low priority but I was really annoyed by the lack of logo,
@@ -29,6 +113,8 @@ represnt whats in the import statement.
 okay so i need to write consol.log() in .js files to see what's running and whats not tomorrow. I really want to keep working on it because I feel like
 I'm on a roll, however, i'm also gettign tired and I have church so I'll take care of this after church and just bring my laptop to the family dinner so if I'm not chatty with 
 someone I can code. 
+
+
 
 3/14/2025
 

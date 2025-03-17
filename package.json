@@ -17,5 +17,12 @@
         "express-validator": "^7.2.1",
         "formidable": "^3.5.2",
         "pg": "^8.13.3"
-    }
+    },
+    "name": "checkthisout",
+    "version": "1.0.0",
+    "description": "With the packages installed you're ready to run the initial test. 1. If the VSC terminal is still open use it. If it is closed, open it again using the same command as before.",
+    "main": "server.js",
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
 }

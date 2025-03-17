@@ -11,14 +11,6 @@ import { configureStaticPaths } from './src/utils/index.js';
 import { fileURLToPath } from 'url';
 import { testDatabase } from './src/models/index.js';
 
-//To guide .env to postgress
-//Because I  got really annoyed and tired of reinstalling and uninstalling postgress (SOO TIMES MAN.)
-import dotenv from 'dotenv';
-dotenv.config();
-const myAppPath = process.env.MY_APP_PATH;
-const dbUrl = process.env.DB_URL.replace('${MY_APP_PATH}', myAppPath);
-console.log(dbUrl); 
-
 /**
  * Global Variables
  */
@@ -92,3 +84,5 @@ app.listen(port, async () => {
     await testDatabase();
     console.log(`Server running on http://127.0.0.1:${port}`);
 });
+
+console.log("server.js is running"); // This line is added to confirm that server.js is running

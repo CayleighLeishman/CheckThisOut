@@ -1,5 +1,9 @@
 3/17/25
 
+
+
+
+11:50 
 Okay Im giving up, I decided to see if maybe i didn't install everything and it turns out
  I forgot to install express, ejs path (Facepalm.) So I'm installing that now, and we'll 
  if that fixes things, or iff I missed something else (which I''m sure I did.)
@@ -62,6 +66,17 @@ out what the heck i did the last few minutes.
 I checked the getNav in the utils folder and the get nav is defined. But I can't tell what I'm missing. 
  
  11:28 I'm going to end it here for now because I have some stuff to take care of but this is going to be in th eback of my midn all day
+
+3:50 talked to a  one classmate to check if everything in my dependencies packages and it looks like I have everything in the packages.json file. 
+I needed. I also asked a different classmate and he noted that consol.log only shows in the terminal. So thats why i wasn't getting anything (sigh)
+
+so anyways I realized how to make better comments in consol.log. I dont just say what line its on, I say what funciton its in to see if its running. At least one was
+running so things are running, just not everything. 
+
+
+
+
+
 
 3/16/2025
 1:00

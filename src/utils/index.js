@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 
+console.log('src/utils/index.js: after imports');
 /** @type {Array<{route: string, dir: string}|string>} Static path configurations */
 const staticPaths = [
    { route: '/css', dir: 'public/css' },
@@ -23,15 +24,18 @@ const configureStaticPaths = (app) => {
     
     staticPaths.forEach((pathConfig) => {
         const pathKey = typeof pathConfig === 'string' ? pathConfig : pathConfig.route;
-        console.log('src/utils/index.js');
+       
 
         if (!registeredPaths.has(pathKey)) {
+            console.log('src/utils/index.js line 40: registeredPath: passed');
             registeredPaths.add(pathKey);
             
             if (typeof pathConfig === 'string') {
+                console.log('src/utils/index.js if typeof pathConfig === string: passed');
                 // Register the path directly
                 app.use(pathConfig, express.static(pathConfig));
             } else {
+                console.log('src/utils/index.js line 38 else: passed');
                 // Register the path with the specified route and directory
                 app.use(pathConfig.route, express.static(path.join(process.cwd(), pathConfig.dir)));
             }
@@ -50,9 +54,8 @@ const configureStaticPaths = (app) => {
 
 console.log('src/utils/index.js: before getNav()');
 const getNav = () => {
-    return 
-    console.log('src/utils/index.js: getNav()');
-    `<nav>
+    console.log('src/utils/index.js: inside getNav()');
+    return `<nav>
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/login">Login</a></li>
@@ -63,7 +66,6 @@ const getNav = () => {
             <li><a href="/contact">Contact</a></li>
         </ul>
     </nav>`;
-
 }
 
 export { configureStaticPaths, getNav };

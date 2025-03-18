@@ -10,6 +10,7 @@ import path from "path";
 import { configureStaticPaths } from './src/utils/index.js';
 import { fileURLToPath } from 'url';
 import { testDatabase } from './src/models/index.js';
+import {getNav} from './src/utils/index.js';
 
 /**
  * Global Variables
@@ -85,4 +86,5 @@ app.listen(port, async () => {
     console.log(`Server running on http://127.0.0.1:${port}`);
 });
 
-console.log("server.js is running"); // This line is added to confirm that server.js is running
+
+console.log(" last Line of server.js is running"); // This line is added to confirm that server.js is running

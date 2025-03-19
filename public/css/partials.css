@@ -1,0 +1,67 @@
+/* with assist of built in ai chat. */
+@import url('/colors.css'); /* Importing colors.css for color variables */
+
+/* Styles for the header layout */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+header img {
+    max-height: 60px;
+    width: auto;
+    float: left;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+nav {
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #e2e6ea;
+}
+/* Styles for the footer layout */
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    flex-shrink: 0;
+    font-size: 12px;
+}
+
+footer p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #007bff;
+    margin-left: 5px;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #0056b3;
+}

@@ -1,7 +1,121 @@
+3/19/2
+
+
+I'm trying to narrow down what I have to do, but I am not feeling very good, so I'm going to take a look around and see what I can do.
+
+
+So I ran the server js "pnpm dev" in terminal and noticed a bunch of errors. 
+
+"
+____________________________ERROR____________________________
+
+command: > nodemon --env-file=.env server.js
+
+node:internal/modules/cjs/loader:1252
+  throw err;
+  ^
+
+Error: Cannot find module 'chokidar'
+Require stack:
+- C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\nodemon@3.1.9\node_modules\nodemon\lib\monitor\watch.js
+- C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\nodemon@3.1.9\node_modules\nodemon\lib\monitor\run.js
+- C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\nodemon@3.1.9\node_modules\nodemon\lib\monitor\index.js
+- C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\nodemon@3.1.9\node_modules\nodemon\lib\nodemon.js
+- C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\nodemon@3.1.9\node_modules\nodemon\lib\index.js
+- C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\nodemon@3.1.9\node_modules\nodemon\bin\nodemon.js
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1249:15)
+    at Function._load (node:internal/modules/cjs/loader:1075:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:219:24)
+    at Module.require (node:internal/modules/cjs/loader:1340:12)
+    at require (node:internal/modules/helpers:138:16)
+    at Object.<anonymous> (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\nodemon@3.1.9\node_modules\nodemon\lib\monitor\watch.js:6:16)  
+    at Module._compile (node:internal/modules/cjs/loader:1565:14)
+    at Object..js (node:internal/modules/cjs/loader:1708:10)
+    at Module.load (node:internal/modules/cjs/loader:1318:32) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\cayle\\Documents\\byui\\cse-340-project\\CheckThisOut\\node_modules\\.pnpm\\nodemon@3.1.9\\node_modules\\nodemon\\lib\\monitor\\watch.js',
+    'C:\\Users\\cayle\\Documents\\byui\\cse-340-project\\CheckThisOut\\node_modules\\.pnpm\\nodemon@3.1.9\\node_modules\\nodemon\\lib\\monitor\\run.js',
+    'C:\\Users\\cayle\\Documents\\byui\\cse-340-project\\CheckThisOut\\node_modules\\.pnpm\\nodemon@3.1.9\\node_modules\\nodemon\\lib\\monitor\\index.js',
+    'C:\\Users\\cayle\\Documents\\byui\\cse-340-project\\CheckThisOut\\node_modules\\.pnpm\\nodemon@3.1.9\\node_modules\\nodemon\\lib\\nodemon.js',
+    'C:\\Users\\cayle\\Documents\\byui\\cse-340-project\\CheckThisOut\\node_modules\\.pnpm\\nodemon@3.1.9\\node_modules\\nodemon\\lib\\index.js',
+    'C:\\Users\\cayle\\Documents\\byui\\cse-340-project\\CheckThisOut\\node_modules\\.pnpm\\nodemon@3.1.9\\node_modules\\nodemon\\bin\\nodemon.js'
+  ]
+}
+
+Node.js v22.12.0
+ ELIFECYCLE  Command failed with exit code 1.
+" 
+________________________END ERROR____________________________
+
+i figured dout it was because I moved my CHECKTHISOUT file to a different folder so I reinstalled everything 
+
+i did pnpm install 
+
+It asked if I was okay replacing th enode_modules
+
+I said yes
+and it installed and looks like the installation passed
+
+it gave an error in index.js but it was just an extra letter "b" that I have no idea where it came from. 
+
+IT WORKED 
+YES 
+TAKE THAT 
+
+Nvm I spoke to soon, I opened localHost://3000 and it said: 
+ReferenceError: getGenres is not defined
+    at getNav (file:///C:/Users/cayle/Documents/byui/cse-340-project/CheckThisOut/src/utils/index.js:58:19)
+    at configNodeEnv (file:///C:/Users/cayle/Documents/byui/cse-340-project/CheckThisOut/src/middleware/node-env.js:9:32)
+    at Layer.handleRequest (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\lib\layer.js:145:17)
+    at trimPrefix (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\index.js:336:13)
+    at C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\index.js:294:9
+    at processParams (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\index.js:574:12)
+    at next (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\index.js:288:5)
+    at Function.handle (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\index.js:182:3)
+    at Function.handle (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\express@5.0.1\node_modules\express\lib\application.js:179:15)
+    at Server.app (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\express@5.0.1\node_modules\express\lib\express.js:38:9)
+
+
+Okay, I figured out what went wrong:
+
+So when I talekd to the proffessor he suggested that I work on the getGenres function, but I didn't know where to put it.
+So I put it in the utils file, but I think it should be in the src/routes/index.js file. So I moved it there and now it works. (auto cht gave me thiss
+so now I'm going to see if it works.)
+
+I got really distracted and started creating a login and logout and created a page for generated quotes when 
+a user logs out. I don't think I wrote the path correctly, however, I'm going to leave that for another time. 
+
+I got the routes working for these pages:
+login
+logout
+dashboard (need to add a logout button)
+profile
+
+
+I did a bunch of other stuff along the way like updated the singout generator, added admin folder in models (to create an admin account), 
+and added a few other things that I don't quite remember because I got caught up with the code lol. 
+
+I tried to create a generated quote page, but I think I'll put that off till later IF I have time. I have a lot to focus on instead. 
+
+but I'm proud of the progress I've made. 
+
+I created css for the partials because I was getting sick and tired of how big everything was and how disorganized it looked, so i
+added css and learned that you actually CAN import css into another css file. I was suprised by that. It dosen't look pretty yet,
+but I just wanted it to be functional. 
+
+I created a contacts.css but then realized i could have it in main.css. I might ask the professor when I should consider having different CSS styes
+but I'd like to wait till I can get the routes and database working first.I spent enough time on the interactivity. I might take a break 
+now and work on it again later tonight if i get the other stuff working, but we'll see. I need to get going on my final project for my classes.
+I wont get an A which is disapointing but I know I'm not going to have a lot of streangth to finish this semster strong. I'm in so much pain
+and I had a weird episode where I fel tlike i was going to pass out and I kept feeling hot then cold and then having shakes and it hurt my
+neck and back pretty intensly and the professor had to get me a cold waterbottle, which I really appreciated but i was still internally 
+both freaked out and reallly frusterated. I thought I wass doing fine but the treatment dont feel like're working. So I'm really frusterated. 
+
+anyways back to the code, I thikn there's a lot left to do but im happy with the progress made. 
+
 3/17/25
-
-
-
 
 11:50 
 Okay Im giving up, I decided to see if maybe i didn't install everything and it turns out

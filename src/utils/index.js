@@ -59,13 +59,40 @@ const getNav = () => {
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Sign Up</a></li>
             <li><a href="/profile">Profile</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/genre"></a>Genre</li> 
             <li><a href="/contact">Contact</a></li>
         </ul>
     </nav>`;
-}
+};
+    // When you implement the Database, uncomment this code
+// const genre = await getGenres();
+// }
+// const getNav = async () => {
+
+//     const genre = await getGenres();
+//     console.log('src/utils/index.js line 62: genre:', genre);
+
+//     let nav = '<nav><ul>';
+
+//     genre.forEach((genre) => {
+//         nav += `<li><a href="/genre/${genre.id}">${genre.title}</a></li>`;
+//     });
+
+//     nav += `<nav>
+//         <ul>
+//             <li><a href="/">Home</a></li>
+//             <li><a href="/login">Login</a></li>
+//             <li><a href="/signup">Sign Up</a></li>
+//             <li><a href="/profile">Profile</a></li>
+//             <li><a href="/dashboard">Dashboard</a></li>
+//             <li><a href="/genre"></a>Genre</li> 
+//             <li><a href="/contact">Contact</a></li>
+//         </ul>
+//     </nav>`;
+
+//     return `${nav}</ul></nav>`;
+// };  
 
 export { configureStaticPaths, getNav };

@@ -1,0 +1,9 @@
+<!-- make sure you change vairable names ERASE THIS ONLY AND ONLY AFTER YOU CREATED DB AND TRIPPLE CHECKED VARIABLE NAMES -->
+
+
+<h1>Genres</h1>
+<ul>
+    <% genres.forEach(genre => { %>
+        <li><a href="/genre/<%= genre.id %>"><%= genre.title %></a></li>
+    <% }) %>
+</ul>

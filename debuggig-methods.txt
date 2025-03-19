@@ -1,8 +1,6 @@
-3/19/2
-
+3/19/25
 
 I'm trying to narrow down what I have to do, but I am not feeling very good, so I'm going to take a look around and see what I can do.
-
 
 So I ran the server js "pnpm dev" in terminal and noticed a bunch of errors. 
 

@@ -1,6 +1,10 @@
 /* with assist of built in ai chat. */
 @import url('/colors.css'); /* Importing colors.css for color variables */
 
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*       Styles for the header layout        */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* Styles for the header layout */
 header {
     display: flex;
@@ -19,24 +23,45 @@ header img {
     vertical-align: middle;
 }
 
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*                Navigation                 */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 nav {
     display: flex;
     gap: 15px;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 nav a {
     text-decoration: none;
-    color: #333;
+    color: var(--black); /* Using the black color variable */
     font-weight: bold;
     padding: 5px 10px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
+nav ul {
+    list-style: none; /* Removes bullet points */
+    display: flex; /* Puts list items side by side */
+    gap: 15px; /* Adds spacing between items */
+    padding: 0; /* Removes default padding */
+    margin: 0; /* Removes default margin */
+}
+
+nav li {
+    display: inline; /* Ensures list items are inline */
+}
 nav a:hover {
     background-color: #e2e6ea;
 }
-/* Styles for the footer layout */
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*                Footer                     */ 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 footer {
     display: flex;
     align-items: center;

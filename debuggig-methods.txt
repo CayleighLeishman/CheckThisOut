@@ -1,3 +1,66 @@
+3/20/2025
+
+12:21, I had a few minutes before my tutoring appointment so I decided to check in on the code. I tried to see if i could convert my notes
+to .md format, but honesltsy I've gotten the handle of txt. If I do change my mind, I'll give the work to future cayleigh to worry about instead. 
+
+12:37 I ended up just workig on the css for partials.css because I had a hard time thinking about what to do and also the navigation was BUGGING me
+so I designed the navigation to be side to side. I'm really impressed and happpy with the work on it. It's not the colors I think I'll stick with
+but I like the layout. I also added a hover effect to the links. I think I might add a hover effect to the buttons as well, but I haven't decided
+the color yet, so I'm just going to leave it for now and worry about it after the routes work.
+
+Speaking of Routes; both profile and Dashboard are not working. It has some codding errors: 
+
+```console SyntaxError for profile: 
+Unexpected token ')' in C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\src\views\profile.ejs while compiling ejs
+
+If the above error is not helpful, you may want to try EJS-Lint:
+https://github.com/RyanZim/EJS-Lint
+Or, if you meant to create an async function, pass `async: true` as an option.
+    at new Function (<anonymous>)
+    at Template.compile (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\ejs@3.1.10\node_modules\ejs\lib\ejs.js:673:12)
+    at Object.compile (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\ejs@3.1.10\node_modules\ejs\lib\ejs.js:398:16)
+    at handleCache (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\ejs@3.1.10\node_modules\ejs\lib\ejs.js:235:18)
+    at tryHandleCache (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\ejs@3.1.10\node_modules\ejs\lib\ejs.js:274:16)
+    at exports.renderFile (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\ejs@3.1.10\node_modules\ejs\lib\ejs.js:491:10)
+    at res.render (file:///C:/Users/cayle/Documents/byui/cse-340-project/CheckThisOut/src/middleware/layouts.js:31:9)
+    at file:///C:/Users/cayle/Documents/byui/cse-340-project/CheckThisOut/src/routes/index.js:45:9
+    at Layer.handleRequest (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\lib\layer.js:145:17)
+    at next (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\lib\route.js:160:13)
+```
+and for Dashboard: 
+```console SyntaxError for dashboard:
+ReferenceError: C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\src\views\dashboard.ejs:5
+    3| <main>
+
+    4|     <section>
+
+ >> 5|         <h2>Welcome, <%= user.name %>!</h2>
+
+    6|         <p>This is your dashboard. Here you can manage your activities and view updates.</p>
+
+    7|     </section>
+
+    8|     <section>
+
+user is not defined
+    at eval ("C:\\Users\\cayle\\Documents\\byui\\cse-340-project\\CheckThisOut\\src\\views\\dashboard.ejs":12:26)
+    at dashboard (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\ejs@3.1.10\node_modules\ejs\lib\ejs.js:703:17)
+    at tryHandleCache (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\ejs@3.1.10\node_modules\ejs\lib\ejs.js:274:36)
+    at exports.renderFile (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\ejs@3.1.10\node_modules\ejs\lib\ejs.js:491:10)
+    at res.render (file:///C:/Users/cayle/Documents/byui/cse-340-project/CheckThisOut/src/middleware/layouts.js:31:9)
+    at file:///C:/Users/cayle/Documents/byui/cse-340-project/CheckThisOut/src/routes/index.js:53:9
+    at Layer.handleRequest (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\lib\layer.js:145:17)
+    at next (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\lib\route.js:160:13)
+    at Route.dispatch (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\lib\route.js:120:3)
+    at handle (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\index.js:427:11)
+```        
+
+
+
+
+
+
+
 3/19/25
 
 I'm trying to narrow down what I have to do, but I am not feeling very good, so I'm going to take a look around and see what I can do.

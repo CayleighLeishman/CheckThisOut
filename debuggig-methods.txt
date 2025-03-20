@@ -55,7 +55,7 @@ user is not defined
     at handle (C:\Users\cayle\Documents\byui\cse-340-project\CheckThisOut\node_modules\.pnpm\router@2.1.0\node_modules\router\index.js:427:11)
 ```        
 
-
+My ta is ready now so I'm going to be done for now. I'll work on it later tonight. 
 
 
 

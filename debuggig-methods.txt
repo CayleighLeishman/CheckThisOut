@@ -1,4 +1,41 @@
+3/24/25
+
+I didnt realiz ehow long its been since I did this, but I'm looking now at trying to figure out the postgresql. I think it's supposed 
+to go in the "Models" folder, but I'm not 100% sure. I'm going to try to figure it out now. 
+
+I'm utilizing chatgbt to ensure I understand what I'm putting in usesrs.js. I'm trying to figure out how to organize
+and connect my files because I want it to be broken down and simple to read, but i'm not sure how to set it up 100%. 
+I do like the idea of breaking each files in models for each table, but I'm not sure if that's the best way to go about it.
+I'm going to try it out and see if it works.
+
+I did use chatgbt to help me understand how to set up the users.js file and understand what "pools" is doing. 
+ I'm not sure if I'm doing it right, but I'm going to try it out because it seems like it'll be easiest to organize by if I can see 
+ what each file is for. 
+
+ I typed in "Import' in server.js then forgot promptly why I did that then went back to work on users.js. I added a way to add users, delete users, validate date of birthday
+ added a way to get all users in a table, and get a user by id. I think it's doing something, so we'll find out!
+3/21/2025
+4:10 
+so tody all ive done so far is just provided an progress update, but im hoping to get a lot done this week./ 
+
+4:17 added an about page and a contact page
+down the len i might make a page about how it works, but i think i'll put it as a readme later down the line.
+
+I realized i created a signup page when it should have been "register" it probably dosent matter but i wanted to keep 
+it consistent
+
+
+4:34 i used 
+```bash
+npm install pg dotenv
+`
+to install the pg and dotenv packages. I also added the dotenv.config() to the server.js file.
+
+I keep getting drastically tired so I'll cime back to this nce I'm more levelheaded. 
+
+
 3/20/2025
+
 
 12:21, I had a few minutes before my tutoring appointment so I decided to check in on the code. I tried to see if i could convert my notes
 to .md format, but honesltsy I've gotten the handle of txt. If I do change my mind, I'll give the work to future cayleigh to worry about instead. 
@@ -56,8 +93,6 @@ user is not defined
 ```        
 
 My ta is ready now so I'm going to be done for now. I'll work on it later tonight. 
-
-
 
 
 

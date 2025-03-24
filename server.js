@@ -11,6 +11,8 @@ import { configureStaticPaths } from './src/utils/index.js';
 import { fileURLToPath } from 'url';
 import { testDatabase } from './src/models/index.js';
 import {getNav} from './src/utils/index.js';
+import dotenv from 'dotenv';
+
 
 /**
  * Global Variables
@@ -25,6 +27,9 @@ const port = process.env.PORT;
  * Create and configure the Express server
 */
 const app = express();
+
+// Configure dotenv to load the .env file
+dotenv.config();
 
 // Configure the application based on environment settings
 app.use(configNodeEnv);
@@ -85,6 +90,8 @@ app.listen(port, async () => {
     await testDatabase();
     console.log(`Server running on http://127.0.0.1:${port}`);
 });
+// Load environment variables from a .env file into process.env
+
 
 
 console.log(" last Line of server.js is running"); // This line is added to confirm that server.js is running

@@ -92,6 +92,10 @@ app.listen(port, async () => {
 });
 // Load environment variables from a .env file into process.env
 
-
+// Example global error handler in server.js
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
 console.log(" last Line of server.js is running"); // This line is added to confirm that server.js is running

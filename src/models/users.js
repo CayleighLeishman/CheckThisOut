@@ -1,69 +1,63 @@
 import pool from './db.js';
+import bcrypt from 'bcrypt';
 
+
+// =========================================================================== //
+//  Hashes a password using bcrypt with a specified number of "alt rounds.     //
+// This function is used to securely store passwords in the database.         //
+// ===========================================================================// 
+const pass_hash= async (password) => {
+    const saltRounds = 10;
+    return await bcrypt.hash(password, saltRounds);
+};
 // Function to create the users table
 export const createUsersTable = async () => {
-    const query = `CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
-        username VARCHAR(100) NOT NULL,
-        email VARCHAR(100) NOT NULL,
-        given_name VARCHAR(100),    -- New column for given name
-        family_name VARCHAR(100),   -- New column for family name
-        dob DATE                    -- New column for date of birth
-    )`;
+    const query = `
+        CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            username VARCHAR(100) UNIQUE NOT NULL,
+            email VARCHAR(100) UNIQUE NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            given_name VARCHAR(100),
+            family_name VARCHAR(100),
+            dob DATE,
+            role VARCHAR(50) DEFAULT 'customer'
+        )
+    `;
     try {
         await pool.query(query);
-    } 
-    catch (error) {
+        console.log('Users table created successfully or already exists.');
+    } catch (error) {
         console.error('Error creating users table:', error);
         throw error;
     }
 };
 
 // Function to add a new user
-export const createUser = async (username, email, given_name, family_name, dob) => {
-    validateDob(dob); // Validate the date of birth before proceeding
-    const query = 'INSERT INTO users (username, email, given_name, family_name, dob) VALUES ($1, $2, $3, $4, $5) RETURNING *';
-    const values = [username, email, given_name, family_name, dob];
+export const createUser = async (username, email, password, given_name, family_name, dob, role = 'customer') => {
     try {
+        const hashedPassword = await pass_hash(password);
+        const query = `
+            INSERT INTO users (username, email, password, given_name, family_name, dob, role)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING *
+        `;
+        const values = [username, email, hashedPassword, given_name, family_name, dob, role];
         const res = await pool.query(query, values);
-        return res.rows[0]; // Returns the newly created user
-    }
-    catch (error) {
+        return res.rows[0];
+    } catch (error) {
         console.error('Error creating user:', error);
         throw error;
-    };
-};
-
-// Function to validate and update the date of birth
-export const validateAndUpdateDob = async (id, dob) => {
-    // Validate the date of birth
-    if (dob === null || dob === undefined) {
-        throw new Error('Date of birth is required');
-    }
-    if (isNaN(Date.parse(dob))) {
-        throw new Error('Invalid date of birth');
-    }
-
-    const query = 'UPDATE users SET dob = $1 WHERE id = $2 RETURNING *';
-    const values = [dob, id];
-    try {
-        const res = await pool.query(query, values);
-        return res.rows[0]; // Returns the updated user
-    } catch (error) {
-        console.error('Error updating date of birth:', error);
-        throw error;
     }
 };
-
 
 // Function to get all users
 export const getAllUsers = async () => {
-    const query = 'SELECT * FROM users';
+    const query = 'SELECT id, username, email, given_name, family_name, dob, role FROM users';
     try {
-       const res = await pool.query(query);
-       return res.rows; // Returns an array of users
-    }
-    catch (error) {
+        const res = await pool.query(query);
+        return res.rows;
+    } catch (error) {
         console.error('Error getting users:', error);
         throw error;
     }
@@ -71,26 +65,43 @@ export const getAllUsers = async () => {
 
 // Function to get a user by ID
 export const getUserById = async (id) => {
-    const query = 'SELECT * FROM users WHERE id = $1';
+    const query = 'SELECT id, username, email, given_name, family_name, dob, role FROM users WHERE id = $1';
     const values = [id];
     try {
         const res = await pool.query(query, values);
-        return res.rows[0];}
-    catch (error) {
+        return res.rows[0];
+    } catch (error) {
         console.error('Error getting user by ID:', error);
         throw error;
     }
 };
 
-// Function to update a user
-export const updateUser = async (id, username, email, given_name, family_name, dob) => {
-    const query = 'UPDATE users SET username = $1, email = $2, given_name = $3, family_name = $4, dob = $5 WHERE id = $6 RETURNING *';
-    const values = [username, email, given_name, family_name, dob, id];
+// Function to get a user by username
+export const getUserByUsername = async (username) => {
+    const query = 'SELECT id, username, email, password, given_name, family_name, dob, role FROM users WHERE username = $1';
+    const values = [username];
     try {
         const res = await pool.query(query, values);
         return res.rows[0];
+    } catch (error) {
+        console.error('Error getting user by username:', error);
+        throw error;
     }
-    catch (error) {
+};
+
+// Function to update a user
+export const updateUser = async (id, username, email, given_name, family_name, dob, role) => {
+    const query = `
+        UPDATE users
+        SET username = $1, email = $2, given_name = $3, family_name = $4, dob = $5, role = $6
+        WHERE id = $7
+        RETURNING *
+    `;
+    const values = [username, email, given_name, family_name, dob, role, id];
+    try {
+        const res = await pool.query(query, values);
+        return res.rows[0];
+    } catch (error) {
         console.error('Error updating user:', error);
         throw error;
     }
@@ -103,12 +114,36 @@ export const deleteUser = async (id) => {
     try {
         const res = await pool.query(query, values);
         if (res.rows.length === 0) {
-            return null; // Returns null if no user was found
+            return null;
         }
-            return res.rows[0]; // Returns the deleted user
-    }   
-    catch (error) {
+        return res.rows[0];
+    } catch (error) {
         console.error('Error deleting user:', error);
         throw error;
-    };
+    }
+};
+
+// Function to validate and update the date of birth
+export const validateAndUpdateDob = async (id, dob) => {
+    if (dob === null || dob === undefined) {
+        throw new Error('Date of birth is required');
+    }
+    if (isNaN(Date.parse(dob))) {
+        throw new Error('Invalid date of birth');
+    }
+
+    const query = 'UPDATE users SET dob = $1 WHERE id = $2 RETURNING *';
+    const values = [dob, id];
+    try {
+        const res = await pool.query(query, values);
+        return res.rows[0];
+    } catch (error) {
+        console.error('Error updating date of birth:', error);
+        throw error;
+    }
+};
+
+// Function to verify a password
+export const verifyPassword = async (password, hashedPassword) => {
+    return await bcrypt.compare(password, hashedPassword);
 };

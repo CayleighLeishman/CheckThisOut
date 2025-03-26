@@ -1,3 +1,30 @@
+3/25/2025
+
+I realize dI didnt' ahve a controllers so I took to chat to confirm somethigs
+chatt didnt work so I used gemii 
+
+it suggested  use npm install bcrypt for password hashing 
+
+so I did npm install bcryppt and then CTRL+C to stop the server and then pnpm dev to restart the server
+and then typed it properly and let it download.  Its a library that 
+provides password hashing functionality. I probably didt' need it, but wanted to play aroudn with it 
+a smidge. 
+
+So anyways that's installing and then I'll check that it installed in package.json 
+as well. Then i'll move on to the next step.
+
+I implimented it into the users.js file and 
+then I'm going to test it ou... once I get the postgres database going XD
+
+okay i fixed up the models/users.js file, so I added hashing, and updated to add roles. I oroginally was goig 
+to have a roles table, but when i used gemeni it made a solid point about adding complexitty so I decided to narrow it down to users 
+so I'll create the other database tables later down the line.
+
+so thats what i updated on today. I fixed yup everything so that it had all the proper rows and information
+needed in each section. I learned how to navigate placeholders (the $1 $2 $3) and how to use them in the query.
+that was pretty cool. not sure how entirely secure it is, but i bet its secure enough for a project like this.
+
+
 3/24/25
 
 I didnt realiz ehow long its been since I did this, but I'm looking now at trying to figure out the postgresql. I think it's supposed 
@@ -14,12 +41,15 @@ I did use chatgbt to help me understand how to set up the users.js file and unde
 
  I typed in "Import' in server.js then forgot promptly why I did that then went back to work on users.js. I added a way to add users, delete users, validate date of birthday
  added a way to get all users in a table, and get a user by id. I think it's doing something, so we'll find out!
+
+
+
 3/21/2025
 4:10 
 so tody all ive done so far is just provided an progress update, but im hoping to get a lot done this week./ 
 
 4:17 added an about page and a contact page
-down the len i might make a page about how it works, but i think i'll put it as a readme later down the line.
+down the len I might make a page about how it works, but i think i'll put it as a readme later down the line.
 
 I realized i created a signup page when it should have been "register" it probably dosent matter but i wanted to keep 
 it consistent

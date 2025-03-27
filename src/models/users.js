@@ -1,15 +1,6 @@
-import pool from './db.js';
-import bcrypt from 'bcrypt';
+import pool from './index.js';
+import { pass_hash } from '../utils/auth.js';
 
-
-// =========================================================================== //
-//  Hashes a password using bcrypt with a specified number of "alt rounds.     //
-// This function is used to securely store passwords in the database.         //
-// ===========================================================================// 
-const pass_hash= async (password) => {
-    const saltRounds = 10;
-    return await bcrypt.hash(password, saltRounds);
-};
 // Function to create the users table
 export const createUsersTable = async () => {
     const query = `
@@ -32,7 +23,6 @@ export const createUsersTable = async () => {
         throw error;
     }
 };
-
 // Function to add a new user
 export const createUser = async (username, email, password, given_name, family_name, dob, role = 'customer') => {
     try {
@@ -141,9 +131,4 @@ export const validateAndUpdateDob = async (id, dob) => {
         console.error('Error updating date of birth:', error);
         throw error;
     }
-};
-
-// Function to verify a password
-export const verifyPassword = async (password, hashedPassword) => {
-    return await bcrypt.compare(password, hashedPassword);
 };

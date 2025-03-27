@@ -13,10 +13,9 @@ import { testDatabase } from './src/models/index.js';
 import {getNav} from './src/utils/index.js';
 import dotenv from 'dotenv';
 
-
 /**
  * Global Variables
- */
+*/
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -95,7 +94,7 @@ app.listen(port, async () => {
 // Example global error handler in server.js
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).send('Sorry to say this: but Something broke!');
 });
 
-console.log(" last Line of server.js is running"); // This line is added to confirm that server.js is running
+console.log("last Line of server.js is running"); // This line is added to confirm that server.js is running

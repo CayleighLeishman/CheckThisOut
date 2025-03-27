@@ -1,1 +1,2 @@
-// meant for authentication to determine if a guest or 
+// meant for authentication to determine if a guest or signed in user is accessing the site
+// this middleware is used in the routes that require authentication, ensure this si placedd in the right folder. 

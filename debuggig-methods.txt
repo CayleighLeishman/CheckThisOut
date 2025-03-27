@@ -1,6 +1,52 @@
+3/36/2025
+
+3L25 
+
+I'm trying to decifer if I need a controllers but I just talked with my classmade and he clarified that the routes ARE controllers 
+so I'm going to keep going with that.
+
+the middleware folder is supposed to be for GLOBAL middleware (all of the MVC IS middleware which is why I got confused), 
+so I'm going to keep that in mind, that it's supposed to be code that is used for ALL if not MOST pages. So authentication 
+dosen't need to be in there, but I'm going to keep it there for now because I'm not sure where else to put it. I'm 
+thinking It'll go in the utils folder, but I'm going to play around before commiting to it because for now I KNOW it's in middlware. 
+
+The models are the database information, and views are for what displays on the pages. 
+
+I'm fursterated that I'm not retaining all this intofmation this as well as I hoped, but I appreciate the help from Hyrum (classmate)
+
+I'm now cconfusing myself trying to figure out stuff
+heres what I have so far:\
+
+in Utils I added:
+auth.js (for authentication to ensure passwords are correct and the righ tpeople have access)
+validator.js (to validate passwords, birthdays, etc. I dont know if i need it but I know I want to validate so I'm trying to figure out what I need here)
+
+
+In  src/models:
+added books.js
+removed passwords from users.js- this is supposed to strictly be stuff added to postgres
+imported{ pass_hash } from '../utils/auth.js';
+
+
+I also learned the views/register is not working properly so I need to figure out why it "can't get /register" but that's for another day.
+
+I need to redirect focus onto creating the database and get it so that people can create an account and sign in and out.
+
+
+11:59pm
+
+i addjusted models/users.js to have correct import (was previously importing from db.js but dont currently have a db.js file)
+I also added a genres db
+
+i added code that i think is correct for generes.s but I'll review it tomorrow and determine that later, i got a lot of things to catch up on. So far, 
+I'm not detecting any bugs so I'm going to ensure the site still runs decently and then push my changes to github.
+
+Also, just wantd to say I love that i can use the logo to click back to the home page. One of My Favourite features of websites.
+
+
 3/25/2025
 
-I realize dI didnt' ahve a controllers so I took to chat to confirm somethigs
+I realized I didnt' ahve a controllers so I took to chat to confirm somethigs
 chatt didnt work so I used gemii 
 
 it suggested  use npm install bcrypt for password hashing 
@@ -448,14 +494,12 @@ worry about that down the line and create a "add down the line" section
 anyways i figured for right now I might want a database like the follows
 
 Users           books               genre          staff 
-fname                                               role
+fname          title                                  role
 lname                                               (someone can be both a customer and staff)
 birthday
 city
 address(?)
-role
-
-
+role (fk from staff)
 
 3/10/25
 

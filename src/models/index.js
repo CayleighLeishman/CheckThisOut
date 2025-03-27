@@ -17,6 +17,7 @@ const { Pool } = pg;
  * - port
  * - database
  */
+
 const pool = new Pool({
     connectionString: process.env.DB_URL,
     ssl: false

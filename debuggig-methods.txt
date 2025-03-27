@@ -1,4 +1,13 @@
-3/36/2025
+3/27/2025
+
+4:37 
+
+Im going to just review the inports and see what I can get doen 
+
+I have some thigns to take care of, so I'm going to be done for now, but all I did was add some ways to update and deelte generes table
+or at least that was the intent, but i hope im not confusing the concepts from the other tables. I'll have to review it later.
+
+3/26/2025
 
 3L25 
 
@@ -26,7 +35,6 @@ In  src/models:
 added books.js
 removed passwords from users.js- this is supposed to strictly be stuff added to postgres
 imported{ pass_hash } from '../utils/auth.js';
-
 
 I also learned the views/register is not working properly so I need to figure out why it "can't get /register" but that's for another day.
 

@@ -1,3 +1,91 @@
+3/28/2025
+
+BRRROOO okay, I'm going to figure out by the end of the day:
+
+is everything in the right table?
+
+How to add inserts?
+
+WHAT IS GOING ON WITH THIS STUPID ROUTES things
+
+anyways, everything is fine, but I'm going to figure out genre and see if i got everything there, and then
+go work on books
+
+okay I updated some things in genre, such as changingg it to "generes-model" I can't tell if i should do it that way for my own 
+sanity or leave it so I'll keave it for now until I see a reason not to. 
+
+anyways, I also updated books, I simplified it so that i could utilize it more easily. 
+The only changes I really made was handling missing "PublishedDate" in "addBook" function, and I also 
+added a few more comments to clarify what each function does
+, especially because I kept forgetting what result.rows[0] vs result.rows did. Result.rows returns all rows,
+result.rows[0] returns the first row of the result set. This is important because when you are inserting a new 
+record, you want to return the first row to
+ confirm it was added correctly.
+
+I also updated the delete funciton to return a proper message in genera/ 
+
+
+
+it go tme thinking about permissions though so here's my plan:
+
+customers: can add to their list what they want to read along with a way to review things.
+bonus: if they can have a history to see what books they've added in the past
+
+Staff: can delete and add books to the database, and add books to users account maybe?
+
+Admin: 
+They can do everything, esepcially  manage the genres. They can also view all users
+ and their reviews, but a comment will be ;eft if admin changes it. 
+
+
+updated deleteBook as well, I made it so that it didn't have the Finally { 
+
+ especially because I didnt know what it did, so I'm using it like this instead. }
+
+I can't figre out if in my Try Catches if I type error as error or err. I'm seeing both in examples and 
+I can't remember out which one is correct for my files and how I had decided to do it beforehand. 
+I think it might just be personal preference, but for now, I'm going to stick with "error" because
+ I beleive that's what I used in the other functions.
+
+I spent a lot of time workin gon the error handling in the try catches in models/books-models
+
+I realized I ket repeating const message wayyy to much so I decided to create a function that would 
+help me limit that typing or repetitivity. 
+
+I did the same to genres as well. 
+
+updated the books-models to have fun messages that were more consistent. I probably shouldn't have spent 
+so much time on this (it is now 5:24) but itw as too fun to pass up. 
+
+
+
+
+
+5:36 I did the same things with users lol
+
+
+I also used gemeni and I started prepareing permisisons (src/routes/permissions)
+ and added files that I beleive will implement their permissions properly. We'll find out!
+
+but  Ihad to make sure to add comments for the imports because I cannot remember how to link the fiels corectly.
+
+like, is it 
+../../models/books.js or is it
+src/models/books.js or is it
+../models/books.js
+etc. 
+
+so I'll finish the db tomorrow (fingers crossed) and then I'll work on the permissions after that.
+ I also need to add a few more routes for the books and genres, but I want to make sure the database
+  is set up first.
+
+
+  that will be my goal for tomorrow: work on implementing the db and seeing how routes and permissions go! 
+
+  also in src/routes/permissions I did originally name the files admin-permissions but it's long, 
+  so I think if its in a subfile I might just leave it as admins.js fand so forth for now.
+
+
 3/27/2025
 
 4:37 
@@ -11,8 +99,8 @@ or at least that was the intent, but i hope im not confusing the concepts from t
 
 3L25 
 
-I'm trying to decifer if I need a controllers but I just talked with my classmade and he clarified that the routes ARE controllers 
-so I'm going to keep going with that.
+I'm trying to decifer if I need a controllers but I just talked with my classmade and he clarified that the 
+routes ARE controllers so I'm going to keep going with that.
 
 the middleware folder is supposed to be for GLOBAL middleware (all of the MVC IS middleware which is why I got confused), 
 so I'm going to keep that in mind, that it's supposed to be code that is used for ALL if not MOST pages. So authentication 
@@ -28,7 +116,8 @@ heres what I have so far:\
 
 in Utils I added:
 auth.js (for authentication to ensure passwords are correct and the righ tpeople have access)
-validator.js (to validate passwords, birthdays, etc. I dont know if i need it but I know I want to validate so I'm trying to figure out what I need here)
+validator.js (to validate passwords, birthdays, etc. I dont know if i need it but I know
+ I want to validate so I'm trying to figure out what I need here)
 
 
 In  src/models:
@@ -36,7 +125,8 @@ added books.js
 removed passwords from users.js- this is supposed to strictly be stuff added to postgres
 imported{ pass_hash } from '../utils/auth.js';
 
-I also learned the views/register is not working properly so I need to figure out why it "can't get /register" but that's for another day.
+I also learned the views/register is not working properly so I need to figure out why it
+ "can't get /register" but that's for another day.
 
 I need to redirect focus onto creating the database and get it so that people can create an account and sign in and out.
 
@@ -46,8 +136,9 @@ I need to redirect focus onto creating the database and get it so that people ca
 i addjusted models/users.js to have correct import (was previously importing from db.js but dont currently have a db.js file)
 I also added a genres db
 
-i added code that i think is correct for generes.s but I'll review it tomorrow and determine that later, i got a lot of things to catch up on. So far, 
-I'm not detecting any bugs so I'm going to ensure the site still runs decently and then push my changes to github.
+i added code that i think is correct for generes.s but I'll review it tomorrow and determine that later, 
+i got a lot of things to catch up on. So far, I'm not detecting any bugs so I'm going to ensure the 
+site still runs decently and then push my changes to github.
 
 Also, just wantd to say I love that i can use the logo to click back to the home page. One of My Favourite features of websites.
 
@@ -93,7 +184,8 @@ I did use chatgbt to help me understand how to set up the users.js file and unde
  I'm not sure if I'm doing it right, but I'm going to try it out because it seems like it'll be easiest to organize by if I can see 
  what each file is for. 
 
- I typed in "Import' in server.js then forgot promptly why I did that then went back to work on users.js. I added a way to add users, delete users, validate date of birthday
+ I typed in "Import' in server.js then forgot promptly why I did that then went back to work on users.js. 
+ I added a way to add users, delete users, validate date of birthday
  added a way to get all users in a table, and get a user by id. I think it's doing something, so we'll find out!
 
 
@@ -121,12 +213,14 @@ I keep getting drastically tired so I'll cime back to this nce I'm more levelhea
 3/20/2025
 
 
-12:21, I had a few minutes before my tutoring appointment so I decided to check in on the code. I tried to see if i could convert my notes
-to .md format, but honesltsy I've gotten the handle of txt. If I do change my mind, I'll give the work to future cayleigh to worry about instead. 
+12:21, I had a few minutes before my tutoring appointment so I decided to check in on the code. 
+I tried to see if i could convert my notes to .md format, but honesltsy I've gotten the handle of txt. 
+If I do change my mind, I'll give the work to future cayleigh to worry about instead. 
 
-12:37 I ended up just workig on the css for partials.css because I had a hard time thinking about what to do and also the navigation was BUGGING me
-so I designed the navigation to be side to side. I'm really impressed and happpy with the work on it. It's not the colors I think I'll stick with
-but I like the layout. I also added a hover effect to the links. I think I might add a hover effect to the buttons as well, but I haven't decided
+12:37 I ended up just workig on the css for partials.css because I had a hard time thinking about what to do 
+and also the navigation was BUGGING meso I designed the navigation to be side to side. I'm really impressed and
+ happpy with the work on it. It's not the colors I think I'll stick with but I like the layout. 
+ I also added a hover effect to the links. I think I might add a hover effect to the buttons as well, but I haven't decided
 the color yet, so I'm just going to leave it for now and worry about it after the routes work.
 
 Speaking of Routes; both profile and Dashboard are not working. It has some codding errors: 

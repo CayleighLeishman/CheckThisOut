@@ -1,3 +1,46 @@
+april 1 2025
+
+10:57pm 
+
+I cant see too well but my blood sugar spiked so this will be a long 30 min
+
+9:30 pm
+im struggling to remember most of this project so ill have to talk to the professor. I'm developing a bitof a headache but
+I want to try to get something done.
+
+created te roles-models, i dont know if i need to have anything other than the users given_name. I thikn i'll chnage it to their id.
+
+I worked on the 
+
+roles-model.js and added a way to get all roles, add a role, delete a role, and get a role by id.
+
+auth-routes i created
+
+
+src/routes/index.jsi worked on the posts 
+
+
+src/utils/auth.js i updaed code format and ai suggetedc i use JWTS but im not sure if thats' why im supposed to use.
+
+i dont know if i need it, but im thinking of a contacts table where when people type messages in contacts, it will upload to the table 
+idk if thats the most effective
+
+added getUserByEmail so that i can retreive a ser from the db using their email address
+
+
+added way for users to see the last time they logged in
+
+
+I'm not sure what I need in the sql so I'm just going to implement the 
+
+added database folder and in it now we have 
+
+addGenres
+AddRoles
+and addUsers
+
+i finished what i oculd for addUsers but now going to bed its really late
+
 3/28/2025
 
 BRRROOO okay, I'm going to figure out by the end of the day:
@@ -57,12 +100,7 @@ I did the same to genres as well.
 updated the books-models to have fun messages that were more consistent. I probably shouldn't have spent 
 so much time on this (it is now 5:24) but itw as too fun to pass up. 
 
-
-
-
-
 5:36 I did the same things with users lol
-
 
 I also used gemeni and I started prepareing permisisons (src/routes/permissions)
  and added files that I beleive will implement their permissions properly. We'll find out!

@@ -1,5 +1,6 @@
 import pool from './index.js';
 import { pass_hash } from '../utils/auth.js';
+import { verifyPassword } from '../utils/auth.js'; // assuming you have this helper
 
 // Function to create flash messages with playful touches
 export const createMessage = (message, type = 'info') => {
@@ -45,7 +46,7 @@ export const createUsersTable = async () => {
             given_name VARCHAR(100),
             family_name VARCHAR(100),
             dob DATE,
-            role VARCHAR(50) DEFAULT 'customer'
+            last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         )
     `;
     try {
@@ -130,11 +131,11 @@ export const getUserByUsername = async (username) => {
         }
         const successMessage = createMessage('User fetched successfully! ', 'success');
         console.log(successMessage.message);
-        return res.rows[0];
+        return res.rows[0]; // Returning the user details
     } catch (error) {
         const errorMessage = createMessage('Something went wrong!  Error fetching user: ' + error.message, 'error');
         console.error(errorMessage.message);
-        throw error;
+        throw error; 
     }
 };
 
@@ -202,3 +203,91 @@ export const validateAndUpdateDob = async (id, dob) => {
         throw error;
     }
 };
+
+// Update last logged in time
+export const updateLastLoggedIn = async (userId) => {
+    const query = `
+        UPDATE users 
+        SET last_logged_in = NOW() 
+        WHERE id = $1
+        RETURNING * 
+    `;
+    const values = [userId];
+    try {
+        const res = await pool.query(query, values);
+        console.log('User last logged in time updated!');
+        return res.rows[0];
+    } catch (error) {
+        console.error('Error updating last logged in time:', error.message);
+        throw error;
+    }
+};
+
+//====================================//
+//passwords hashing and verification//
+//=================================//
+
+export const verifyUserPassword = async (email, password) => {
+    const user = await getUserByEmail(email);
+    if (user && await verifyPassword(password, user.password)) {
+        return user;  // Authentication successful
+    } else {
+        throw new Error('Invalid email or password');
+    }
+};
+
+// =============================//
+// User Authentication Functions//
+// =============================//
+
+// Function to retrieve a user from the database by their email address
+export const getUserByEmail = async (email) => {
+    const query = 'SELECT id, username, email, password, given_name, family_name, dob, role FROM users WHERE email = $1';
+    const values = [email];
+    try {
+        const res = await pool.query(query, values);
+        if (!res.rows.length) {
+            return null; // No user found
+        }
+        return res.rows[0];
+    } catch (error) {
+        console.error('Error fetching user by email:', error.message);
+        throw error;
+    }
+};
+
+
+//================================//
+// User Role Management Functions//
+//================================//
+// Function to get all users with their roles
+const getAllUsersWithRoles = async () => {
+    const query = 'SELECT id, username, email, role FROM users';
+    try {
+        const res = await pool.query(query);
+        return res.rows;
+    } catch (error) {
+        console.error('Error fetching users with roles:', error.message);
+        throw error;
+    }
+}
+
+// Function to update a user's role
+export const updateRole = async (id, Role) => {
+    const query = `
+        UPDATE users SET role = $1 WHERE id = $2 RETURNING *
+    `;
+    const values = [newRole, id];
+    try {
+        const res = await pool.query(query, values);
+        const successMessage = createMessage('User role updated successfully!', 'success');
+        console.log(successMessage.message);
+        return res.rows[0];
+    } catch (error) {
+        const errorMessage = createMessage('Oops! There was an error updating the role: ' + error.message, 'error');
+        console.error(errorMessage.message);
+        throw error;
+    }
+};
+
+

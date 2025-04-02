@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import bcrypt from 'bcrypt';
 const router = Router();
  
 /*******************************
@@ -18,13 +19,42 @@ router.get('/login', async (req,res) =>{
 });
 
 router.post('/login', async (req, res) => {
-    // Handle login logic here
+    
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findByEmail(email); // Fetch user from DB
+
+        if (!user) {
+            return res.status(401).send('User not found.');
+        }
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return res.status(401).send('Incorrect password.');
+        }
+
+        // Store user info in session
+        req.session.user = { id: user.id, email: user.email };
+        
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
     
 });
 
 // logged out
 router.post('/logout', async (req, res) => {
-    // Handle logout logic here
+    req.session.destroy(error => {
+        if (err) {
+            return res.redirect('/dashboard');
+        }
+        // Clear the session cookie and redirects
+        res.clearCookie('connect.sid'); 
+        res.redirect('/');
+    });
 });
 
 /*******************************
@@ -35,8 +65,18 @@ router.get('/signup', async (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-    // Handle signup logic here
+    const { email, password } = req.body;
+
+    // Example: Hash password before saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    // Save user to DB (replace with actual DB logic)
+    const newUser = { email, password: hashedPassword };
+    
+    // Redirect or render error
+    res.redirect('/login');
 });
+
 
 /*******************************
  *   User Profile Or Dashboard    *
@@ -46,7 +86,16 @@ router.get('/profile', async (req, res) => {
 });
 
 router.post('/profile/update', async (req, res) => {
-    // Handle profile update
+    const { name, bio } = req.body;
+    
+    // Example: Fetch user from session and update DB
+    const user = req.session.user;
+    if (!user) return res.redirect('/login');
+
+    // Update user details in the database (placeholder logic)
+    console.log(`Updating profile for ${user.email}: Name: ${name}, Bio: ${bio}`);
+
+    res.redirect('/profile');
 });
 
 router.get('/dashboard', async (req, res) => {
@@ -60,8 +109,13 @@ router.get('/contact', async (req, res) => {
     res.render('contact', { title: 'Contact' });
 });
 
+// Handle contact form submission
 router.post('/contact', async (req, res) => {
     // Handle contact form submission
+    const { name, email, message } = req.body;
+    console.log(`Contact form submitted by ${name} (${email}): ${message}`);
+    // Send email or save to DB (placeholder logic)
+    res.redirect('/contact');       
 });
 
 /*******************************

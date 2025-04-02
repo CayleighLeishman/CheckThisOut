@@ -1,16 +1,12 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'; //suggested by AI but i dont know what that is. 
 
 // =========================================================================== //
 //                                   Passwords                                 //    
 // ===========================================================================//
 
-
-
-
-// =========================================================================== //
 //  Hashes a password using bcrypt with a specified number of "alt rounds.     //
 // This function is used to securely store passwords in the database.         //
-// ===========================================================================// 
 const pass_hash= async (password) => {
     const saltRounds = 10;
     return await bcrypt.hash(password, saltRounds);
@@ -39,6 +35,7 @@ export const registerUser = async (username, email, password, given_name, family
             VALUES ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *
         `;
+
         const values = [username, email, hashedPassword, given_name, family_name, dob, 'customer'];
         const res = await pool.query(query, values);
 
@@ -51,3 +48,10 @@ export const registerUser = async (username, email, password, given_name, family
 
 // Function to verify a password
 export const verifyPassword = (password, hashedPassword) => bcrypt.compare(password, hashedPassword);
+
+
+// =========================================================================== //
+//  JWTS Ai suggested jwt tokensm, but im not sur ei knnow the purpose if ut                                 //    
+// ===========================================================================//
+
+//

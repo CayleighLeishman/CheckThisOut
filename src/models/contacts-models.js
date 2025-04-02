@@ -1,0 +1,1 @@
+// this siwhereyou put in the models for the contacts when users type messages into contacts (?)

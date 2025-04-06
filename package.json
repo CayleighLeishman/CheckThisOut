@@ -9,6 +9,8 @@
     },
     "type": "module",
     "dependencies": {
+        "argon2": "^0.41.1",
+        "connect-flash": "^0.1.1",
         "connect-pg-simple": "^10.0.0",
         "dotenv": "^16.4.7",
         "ejs": "^3.1.10",
@@ -20,7 +22,7 @@
     },
     "name": "checkthisout",
     "version": "1.0.0",
-    "description": "With the packages installed you're ready to run the initial test. 1. If the VSC terminal is still open use it. If it is closed, open it again using the same command as before.",
+    "description": "An Express.js application for a library management system with user authentication and role-based access control",
     "main": "server.js",
     "keywords": [],
     "author": "",

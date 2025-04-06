@@ -1,30 +1,30 @@
 /**
  * Imports
  */
-import configNodeEnv from './src/middleware/node-env.js';
 import express from "express";
+import dotenv from 'dotenv';
+import path from "path";
+import sessions from 'express-session';
+import { getNav } from './src/utils/index.js';
+import { fileURLToPath } from 'url';
+import configNodeEnv from './src/middleware/node-env.js';
 import fileUploads from './src/middleware/file-uploads.js';
 import homeRoute from './src/routes/index.js';
+import bookRoutes from './src/routes/book-routes.js';
 import layouts from './src/middleware/layouts.js';
-import path from "path";
 import { configureStaticPaths } from './src/utils/index.js';
-import { fileURLToPath } from 'url';
 import { testDatabase } from './src/models/index.js';
-import {getNav} from './src/utils/index.js';
-import dotenv from 'dotenv';
+// import flash from 'connect-flash'; 
 
 /**
  * Global Variables
 */
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const mode = process.env.NODE_ENV;
 const port = process.env.PORT;
 
-/**
- * Create and configure the Express server
-*/
+// Create and configure the Express server
 const app = express();
 
 // Configure dotenv to load the .env file
@@ -54,11 +54,36 @@ app.use(express.json());
 // Middleware to parse URL-encoded form data (like from a standard HTML form)
 app.use(express.urlencoded({ extended: true }));
 
+//middleware to add flash after session middleware 
+// app.use(flash());
+
+/**
+ * Sessions
+ */
+app.use(sessions({
+    secret: process.env.SESSION_SECRET || 'in_sessions_something_is_wrong_', 
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false} //this for testing
+}));
+console.log('SESSION_SECRET:', process.env.SESSION_SECRET);
+
+
 /**
  * Routes
  */
 
 app.use('/', homeRoute);
+app.use('/books', bookRoutes);
+app.use('/books/:id', bookRoutes);
+
+
+// Example global error handler in server.js (this should be right below your routes)
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Sorry to say this: but Something broke!');
+});
+
 
 /**
  * Start the server
@@ -83,18 +108,31 @@ if (mode.includes('dev')) {
         console.error('Failed to start WebSocket server:', error);
     }
 }
+//get the nav for the current request and make it available in res.locals
+app.use((req, res, next) => {
+    res.locals.nav = getNav(req);
+    next();
+});
 
 // Start the Express server
 app.listen(port, async () => {
-    await testDatabase();
+    await testDatabase(); //TO DO:: eplace this with the setup instead of test
     console.log(`Server running on http://127.0.0.1:${port}`);
 });
-// Load environment variables from a .env file into process.env
 
-// Example global error handler in server.js
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Sorry to say this: but Something broke!');
-});
+console.log(`src/server.js : Node Environment: ${mode}`);
+//to do: 
+//add books on frontend
+// you're missing sessiosn hook that up in server.js
 
-console.log("last Line of server.js is running"); // This line is added to confirm that server.js is running
+//simplify passwords if bcrypt is hard
+//dont use mdfive 
+//get it running on render 
+//on teams there's a link for "force connect with github 
+// //new /web service 
+// digit ocean 
+// 
+
+// for login. when someone tries to log in or create an account on the login page
+// route it to itsself witha flash that says "the account does not exist! Check your password or username
+// if a site does not exist, have a page where it loads "whoops! something happened! Please go back to the previous page"

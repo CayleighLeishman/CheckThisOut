@@ -181,4 +181,15 @@ const getBooksByCreatedDate = async (createdAt) => {
     }
 };
 
-createBooksTable();
+export {
+    createBooksTable,
+    addBook,
+    updateBook,
+    deleteBook,
+    getBooks,
+    getBookById,
+    getBooksByAuthor,
+    getBooksByTitle,
+    getBooksByPublishedDate,
+    getBooksByCreatedDate
+  };

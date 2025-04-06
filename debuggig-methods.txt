@@ -1,3 +1,146 @@
+4/04.2025
+
+I forgot to reference this 
+
+[postgres Introduction](https://video.byui.edu/media/t/1_w1w5h9j0)
+
+added to src/models/books-model.js and fixed server.js
+
+I FINALY GOT THE ROUTES GOING FINALLY!!!! BUT I CAN FINALLY CLICK THE link
+so anyways thought that works, no matter what routes I use i keep getting learned to
+a page that says "logged out" so I'm trying to figure out how its doing that 
+and how to fix it.
+
+
+I also added contact-flash in server.js. I beleive that's the flash that I need to add. 
+
+in routes/index. I realized that I might have the wrong function/paths/names that I need to use.
+so I'm going to go through and see if i can fix that.
+
+I fixed updateRole in users-model.js to be updateUserRole and added a way to get the role by id.
+
+I seem to not understand how SESSION_SECRET works, but chatgbt keeps redirecting me there so I'm going to see if i can figure out how to get that going
+
+okay so i figured out it wasn't that, it was because i iwas connected to the database, but wasn't finding any users. (or at least thats my assumptuon)
+
+so i went to postgres and inputted:
+
+```postgresql
+CREATE TABLE "user" (
+id SERIAL PRIMARY KEY,
+given_name VARCHAR(275) NOT NULL,
+family_name VARCHAR(275) NOT NULL,
+email VARCHAR(275) UNIQUE NOT NULL
+);
+```
+it returned:
+```comment
+CREATE TABLE
+
+Query returned successfully in 110 mseconds (execution time: 0.110 seconds).
+```
+
+so now im going to try 
+
+```postgresql
+SELECT * FROM "user";
+```
+it looks like it worked! Obviously i dont have anything in there, but still!
+
+but i just realized I dont have regex implemented, but i'll try to figure that out once I figure out this next step.
+
+
+HOLY CRAP IT WORKED
+I DONT KNOW WHAT I DID BUT IM SO HAPPY 
+
+(I dont see the logged out page anymore, I just need to get the stinking database to show) 
+
+/register is not sending proeperly so I need to figure out why "register" page is not loading. I think its a routes issue 
+so I'm going to go through and see if I can figure out where its from. 
+
+
+I'm a little nervous to push to github just in case there's a different error thats hidden, but while the website is still functional 
+I'm gonna do it
+
+
+4/03/2025 
+
+Today was a very stressful day and while i got a lot of personal things taken care of, this assingmnet is still not where 
+i hoped it would be. After reviewing the requirements i'm feelin a little bit better, but i'm still feeling lost on 
+Postgress and how to get it ont he frontend. More so how to use postgres. 
+
+The good news: W3schools saves the day. 
+
+[Postgres in W3School -opens in a new tab](https://www.w3schools.com/postgresql/postgresql_pgadmin4.php)
+
+[Kindson The Tech Pro -Youtube opens in a new tab](https://www.youtube.com/watch?v=_n-Ai30C1qs)
+
+I'm going to see what else i can get done tomorrow because I'm barelyawake
+
+
+
+4/03/2025
+
+bcrypt stopped working for me, I'm not sure why it changed, but i unstilalled that package, i messed more with the code 
+and even tried to delete node_modules and install it again, but no avail. so Now I'm replacing it with argon2 which 
+I'm hoping hoping hoping will help me a lot. 
+
+I even tried  "bcryptjs" but it was a bust. 
+
+I installed arogon2. so we;ll see how that goes. 
+
+My goal wsa to get the frontend connected to the db, but
+ chatgbt made a point to recognize that i wasn't using the right postgres connection string. all i need is my
+ db name, so i'm going to make sure that that's activly set up properly. but im falling asleep and i started writing 
+ sentences that didn't make sense about how chatgbt[ was my pregnant bother (sigh)] I'm too sleepy to be coding.
+
+ I wish i could stay awake, but it is what it s at this point. i'll see if i can get the errors fixed up by the end of tomorrow. 
+
+4/02/2025 
+
+meet with professor to figure out the plan and we talked about these things 
+
+//to do: 
+//add books on frontend not in the database of SRC 
+// you're missing sessiosn hook that up in server.js
+
+//simplify passwords if bcrypt is hard
+//dont use mdfive for pass
+//get it running on render 
+//on teams there's a link for "force connect with github 
+// //new /web service 
+
+he stressed to make sure i was making it so that the database would update when it gets added to the website not manually added in the folders. Only in the frontend 
+so I deleted the database folders I created  
+
+I was in so much pain it was hard to code, but I deleted the database, then I  did an 
+```installation 
+npm install express-session 
+```
+to install the ability to use sessions, I need to implement it in the servers.js and see what happens 
+
+
+10:00 pm 
+
+Apparenlty I didn;t install Bcrypt (???) not sure how that happened, but I did 
+
+```install
+npm install bcrypt
+
+```
+
+So it should have gone through this time, and then next I'll try to figure out how to make the layouts work properly
+
+i put in secret_Session in the .env file and put in a secret code. i also added a default in the server.js "in_sesions_something_is_wrong" so
+if there is an unexpected error where it dosent connect to the env file, then i can tell if i randomly see that unex[ectedly
+] i see that that something is wrong and where the issue may be comming from so i can find it. 
+
+each time i try to run it it keeps saying bcrypt is not installed. package.json proved it right so i added it as a dependancies manually and tried to 
+npm install again. if that dosent work i need to delete node_modules and try to reinstall it again. 
+
+
+----------------------------------------------------------------------------
+
 april 1 2025
 
 10:57pm 
@@ -41,6 +184,9 @@ and addUsers
 
 i finished what i oculd for addUsers but now going to bed its really late
 
+trjed to push to github but it gave me some errors 
+
+as long as it keeps my changes, i dont care
 3/28/2025
 
 BRRROOO okay, I'm going to figure out by the end of the day:

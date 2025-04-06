@@ -94,5 +94,5 @@ const getNav = () => {
 
 //     return `${nav}</ul></nav>`;
 // };  
-
+console.log('src/utils/index.js: after getNav()');
 export { configureStaticPaths, getNav };

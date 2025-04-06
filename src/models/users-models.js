@@ -260,6 +260,7 @@ export const getUserByEmail = async (email) => {
 //================================//
 // User Role Management Functions//
 //================================//
+
 // Function to get all users with their roles
 const getAllUsersWithRoles = async () => {
     const query = 'SELECT id, username, email, role FROM users';
@@ -271,9 +272,7 @@ const getAllUsersWithRoles = async () => {
         throw error;
     }
 }
-
-// Function to update a user's role
-export const updateRole = async (id, Role) => {
+export const updateRole = async (id, newRole) => {
     const query = `
         UPDATE users SET role = $1 WHERE id = $2 RETURNING *
     `;
@@ -289,5 +288,3 @@ export const updateRole = async (id, Role) => {
         throw error;
     }
 };
-
-

@@ -1,6 +1,6 @@
 import pool from './index.js';
-import { pass_hash } from '../utils/auth.js';
-import { verifyPassword } from '../utils/auth.js'; // assuming you have this helper
+import { pass_hash, verifyPassword } from '../utils/auth.js'; //double cehck variable names
+
 
 // Function to create flash messages with playful touches
 export const createMessage = (message, type = 'info') => {
@@ -42,12 +42,12 @@ export const createUsersTable = async () => {
             id SERIAL PRIMARY KEY,
             username VARCHAR(100) UNIQUE NOT NULL,
             email VARCHAR(100) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL,
+            hash_pass VARCHAR(255) NOT NULL,
             given_name VARCHAR(100),
             family_name VARCHAR(100),
             dob DATE,
-            last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        )
+            last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );    
     `;
     try {
         await pool.query(query);
@@ -208,7 +208,7 @@ export const validateAndUpdateDob = async (id, dob) => {
 export const updateLastLoggedIn = async (userId) => {
     const query = `
         UPDATE users 
-        SET last_logged_in = NOW() 
+        SET last_login = NOW() 
         WHERE id = $1
         RETURNING * 
     `;
@@ -242,20 +242,17 @@ export const verifyUserPassword = async (email, password) => {
 
 // Function to retrieve a user from the database by their email address
 export const getUserByEmail = async (email) => {
-    const query = 'SELECT id, username, email, password, given_name, family_name, dob, role FROM users WHERE email = $1';
+    const query = 'SELECT * FROM users WHERE email = $1';
     const values = [email];
     try {
         const res = await pool.query(query, values);
-        if (!res.rows.length) {
-            return null; // No user found
-        }
-        return res.rows[0];
+        return res.rows[0] || null;
     } catch (error) {
-        console.error('Error fetching user by email:', error.message);
+        const errorMessage = createMessage('Error fetching user by email: ' + error.message, 'error');
+        console.error(errorMessage.message);
         throw error;
     }
 };
-
 
 //================================//
 // User Role Management Functions//

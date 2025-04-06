@@ -13,7 +13,7 @@ export const createGenresTable = async () => {
     const query = `
         CREATE TABLE IF NOT EXISTS genres (
             id SERIAL PRIMARY KEY,
-            name VARCHAR(100) UNIQUE NOT NULL
+            genre_name VARCHAR(100) UNIQUE NOT NULL
         )
     `;
     try {
@@ -26,12 +26,12 @@ export const createGenresTable = async () => {
 };
 
 // Function to add a new genre
-export const createGenre = async (name) => {
+export const createGenre = async (genre_name) => {
     try {
-        const query = 'INSERT INTO genres (name) VALUES ($1) RETURNING *';
-        const values = [name.toLowerCase().trim()];
+        const query = 'INSERT INTO genres (genre_name) VALUES ($1) RETURNING *';
+        const values = [genre_name.toLowerCase().trim()];
         const result = await pool.query(query, values);
-        return flashMessage('success', `Genre '${result.rows[0].name}' created successfully!`);
+        return flashMessage('success', `Genre '${result.rows[0].genre_name}' created successfully!`);
     } catch (error) {
         console.error('Error creating genre:', error);
         return flashMessage('error', 'Error creating genre.');
@@ -69,13 +69,13 @@ export const getGenreById = async (id) => {
 };
 
 // Function to get a genre by name
-export const getGenreByName = async (name) => {
+export const getGenreByName = async (genre_name) => {
     try {
-        const query = 'SELECT * FROM genres WHERE name ILIKE $1';
-        const values = [name.toLowerCase().trim()];
+        const query = 'SELECT * FROM genres WHERE genre_name ILIKE $1';
+        const values = [genre_name.toLowerCase().trim()];
         const result = await pool.query(query, values);
         if (result.rows.length === 0) {
-            return flashMessage('error', `Genre '${name}' not found.`);
+            return flashMessage('error', `Genre '${genre_name}' not found.`);
         }
         return result.rows[0];
     } catch (error) {
@@ -85,15 +85,15 @@ export const getGenreByName = async (name) => {
 };
 
 // Function to update a genre
-export const updateGenre = async (id, name) => {
+export const updateGenre = async (id, genre_name) => {
     try {
-        const query = 'UPDATE genres SET name = $1 WHERE id = $2 RETURNING *';
-        const values = [name.toLowerCase().trim(), id];
+        const query = 'UPDATE genres SET genre_name = $1 WHERE id = $2 RETURNING *';
+        const values = [genre_name.toLowerCase().trim(), id];
         const result = await pool.query(query, values);
         if (result.rows.length === 0) {
             return flashMessage('error', `Genre with ID ${id} not found for update.`);
         }
-        return flashMessage('success', `Genre '${result.rows[0].name}' updated successfully!`);
+        return flashMessage('success', `Genre '${result.rows[0].genre_name}' updated successfully!`);
     } catch (error) {
         console.error('Error updating genre:', error);
         return flashMessage('error', 'Error updating genre.');
@@ -109,7 +109,7 @@ export const deleteGenre = async (id) => {
         if (!result.rows[0]) {
             return flashMessage('error', 'Genre not found or already deleted.');
         }
-        return flashMessage('success', `Genre '${result.rows[0].name}' has been erased from history!`);
+        return flashMessage('success', `Genre '${result.rows[0].genre_name}' has been erased from history!`);
     } catch (error) {
         console.error('Error deleting genre:', error);
         return flashMessage('error', 'Error deleting genre.');

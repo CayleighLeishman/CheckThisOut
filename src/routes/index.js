@@ -56,24 +56,32 @@ router.post('/logout', async (req, res) => {
 });
 
 /*******************************
- * Sign Up                     *
+ * Sign Up  /REGISTERATION     *
  *******************************/
-router.get('/signup', async (req, res) => {
-    res.render('signup', { title: 'Signup Page' });
+router.get('/register', async (req, res) => {
+    res.render('register', { title: 'Signup Page' });
 });
 
-router.post('/signup', async (req, res) => {
+router.post('/register', async (req, res) => {
     const { email, password } = req.body;
 
-    // Example: Hash password before saving
-    const hashedPassword = await argon2.hash(password); // Use argon2.hash
+    try {
+        // Hash password before saving
+        const hashedPassword = await argon2.hash(password);
 
-    // Save user to DB (replace with actual DB logic)
-    const newUser = { email, password: hashedPassword };
+        // Save user to DB (replace with actual DB logic)
+        const newUser = await User.create({
+            email: email,
+            hash_pass: hashedPassword // Store hashed password in hash_pass column
+        });
 
-    // Redirect or render error
-    res.redirect('/login');
+        res.redirect('/login');
+    } catch (error) {
+        console.error('Error during registration:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
+
 
 /*******************************
  * User Profile Or Dashboard   *

@@ -1,4 +1,93 @@
-4/04.2025
+
+4.06.2025
+i had APP_PAth in .env file so I removed that
+
+I'm going to work on login and flash messages
+
+I'm not sure where to put the validation for passwords so I have it in the public folder for now. Once I get registration and login working I'll see if it should 
+be in public or src.
+
+also when i click "click here to register" it says "cannot get reigister" 
+
+I figured out its because I haven't registered the regiester routes in userRoutes yet (Facepalm) at least i know now!
+
+I forgot to add a couple columns so I added
+
+```postgressql
+ALTER TABLE user
+ADD COLUMN dob DATE,
+ADD COLUMN last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN role VARCHAR(50) DEFAULT 'customer';
+"
+```
+
+I will add passwords later once I figure out hashing
+
+
+I GO TTHE REGISTRATION page
+TAKE THAT
+
+I DONT REMEMBER THE ISSUE BUT ITS Okay
+
+TO DO :
+
+Fix styling issues in the forms (reigster, login, contacts so forth)
+fix response 
+
+I got an error with installing argon2 even though i thought i already had it 
+installed. So I'm trying to debug with chat, and it sucggested to reinstall pnpm 
+
+I added: 
+
+```ejs
+// meant for authentication to determine if a guest or signed in user is accessing the site
+// this middleware is used in the routes that require authentication, ensure this si placedd in the right folder. 
+
+import argon2 from 'argon2';
+
+async function testHashing() {
+    const password = 'mysecurepassword';
+    
+    // Hash the password
+    const hashedPassword = await argon2.hash(password);
+    console.log('Hashed Password:', hashedPassword);
+
+    // Verify the password
+    const isValid = await argon2.verify(hashedPassword, password);
+    console.log('Password is valid:', isValid);
+}
+
+console.log("src/middleware/authenticate.js")
+testHashing();
+```
+to test if the hashing could work.
+
+now I'm going to update the postgres user table to add passwords
+
+
+```postgresql
+ALTER TABLE "user"
+ADD COLUMN hash_pass VARCHAR(255);
+```
+
+Done! 
+
+I worked on debugging for authentication and also added this to postgres
+
+```postgres
+
+ALTER TABLE "user"
+ADD CONSTRAINT unique_email UNIQUE (email);
+```
+this adds constraight and changes the email to be unique vales so we dont accidetnally have the same email put in multiple times
+
+
+
+
+
+
+___________
+4.04.25
 
 I forgot to reference this 
 
@@ -61,6 +150,67 @@ so I'm going to go through and see if I can figure out where its from.
 
 I'm a little nervous to push to github just in case there's a different error thats hidden, but while the website is still functional 
 I'm gonna do it
+
+to the postgresql I added:
+
+```postgresql
+CREATE TABLE genre (
+    id SERIAL PRIMARY KEY,
+    genre_name VARCHAR(175) NOT NULL UNIQUE
+);
+```
+```postgresql
+-- Insert default genres
+INSERT INTO genre (genre_name) VALUES ('fiction'), ('nonfiction');
+```
+
+I realized that I actually named the stuff in the code "name" instead of "genre_name" so I went and tried to fix that in genre-models.js 
+
+I also added the REVIEWS table to the databsae. I dont have a models for it yet but I'll take care of that later. 
+
+```REview postgresql
+CREATE TABLE review (
+    id SERIAL PRIMARY KEY,
+    book_id INT REFERENCES book(id) ON DELETE CASCADE,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    review TEXT
+);
+
+```
+
+CREATE TABLE book (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(275) NOT NULL,
+    author VARCHAR(275) NOT NULL,
+    genre_id INT REFERENCES genre(id) ON DELETE SET NULL
+);
+
+
+I realized it wasn't like my CREATE TABLE in books-model.js so I went and updated it to be like that.
+
+but then i realized i could just DROP the table since htere's nothing in it yet, so I did that instead and used the proper code for it
+```postgresql
+DROP TABLE IF EXISTS book;
+
+```
+
+```postgresql for roles
+
+
+       CREATE TABLE IF NOT EXISTS "roles"(
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id), 
+        role VARCHAR(50) NOT NULL, 
+        description TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+```
+
+
+
+I didnt put all the sql codes I used, but I GOT SIX OF THEM IN TAKE THAT.
+
+tomorrow I'll activly put things in. Right now the genre's are the only table with something in it. 
 
 
 4/03/2025 
@@ -207,7 +357,7 @@ anyways, I also updated books, I simplified it so that i could utilize it more e
 The only changes I really made was handling missing "PublishedDate" in "addBook" function, and I also 
 added a few more comments to clarify what each function does
 , especially because I kept forgetting what result.rows[0] vs result.rows did. Result.rows returns all rows,
-result.rows[0] returns the first row of the result set. This is important because when you are inserting a new 
+result.rows[0] returns the first row of the result set. This is tant because when you are inserting a new 
 record, you want to return the first row to
  confirm it was added correctly.
 

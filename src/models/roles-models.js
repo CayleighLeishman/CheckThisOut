@@ -7,7 +7,7 @@ export const createRolesTable = async () => {
     const query = `
        CREATE TABLE IF NOT EXISTS roles (
         id SERIAL PRIMARY KEY,
-        user_id INTEGER REFERENCES users(id), 
+        user_id INTEGER REFERENCES "user"(id), 
         role VARCHAR(50) NOT NULL, 
         description TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

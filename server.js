@@ -14,7 +14,7 @@ import bookRoutes from './src/routes/book-routes.js';
 import layouts from './src/middleware/layouts.js';
 import { configureStaticPaths } from './src/utils/index.js';
 import { testDatabase } from './src/models/index.js';
-// import flash from 'connect-flash'; 
+import flash from 'connect-flash'; 
 
 /**
  * Global Variables
@@ -54,8 +54,6 @@ app.use(express.json());
 // Middleware to parse URL-encoded form data (like from a standard HTML form)
 app.use(express.urlencoded({ extended: true }));
 
-//middleware to add flash after session middleware 
-// app.use(flash());
 
 /**
  * Sessions
@@ -66,16 +64,31 @@ app.use(sessions({
     saveUninitialized: true,
     cookie: { secure: false} //this for testing
 }));
-console.log('SESSION_SECRET:', process.env.SESSION_SECRET);
 
+//middleware to add flash after session middleware 
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success_mesg = req.flash('success_mesg');
+    res.locals.error_mesg = req.flash('error_mesg');
+    next();
+});
+// Middleware to serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 /**
  * Routes
- */
-
+//  */
 app.use('/', homeRoute);
+
 app.use('/books', bookRoutes);
 app.use('/books/:id', bookRoutes);
+
+// gets the registeration page
+app.get('/register', (req, res) => {
+    res.render('register'); // Make sure this file exists: views/register.ejs (or .html)
+});
+
 
 
 // Example global error handler in server.js (this should be right below your routes)

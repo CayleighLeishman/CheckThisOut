@@ -1,12 +1,15 @@
-<!-- double check EVERYTHING in this  -->
- 
+<% if (error_mesg) { %>
+    <div class="alert alert-danger"><%= error_mesg %></div>
+<% } %>
+
+<% if (success_mesg) { %>
+    <div class="alert alert-success"><%= success_mesg %></div>
+<% } %>
+<script src="../utils/validator.js"></script> <!-- Make sure this path matches your public directory structure -->
+
 <div class="signup-container">
     <h1>Create an Account</h1>
-    <form action="/signup" method="POST">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
+    <form action="/login" method="POST" onsubmit="return validatePasswords()">
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
@@ -20,5 +23,7 @@
             <input type="password" id="confirmPassword" name="confirmPassword" required>
         </div>
         <button type="submit">Sign Up</button>
+        <p>Your email will become your username!</p>
+
     </form>
 </div>

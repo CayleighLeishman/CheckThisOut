@@ -81,7 +81,7 @@ app.use('/books/:id', bookRoutes);
 // Example global error handler in server.js (this should be right below your routes)
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Sorry to say this: but Something broke!');
+    res.status(500).send('Err 500: Sorry to say this... but Something broke!');
 });
 
 

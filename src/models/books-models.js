@@ -1,4 +1,5 @@
 import pool from './index.js';
+// import {createMessage} from '../utils/notif.js'
 
 // Function to create the books table
 const createBooksTable = async () => {
@@ -19,11 +20,6 @@ const createBooksTable = async () => {
     } catch (error) {
         console.error('Error creating books table:', error);
     }
-};
-
-// Helper function to generate messages because I got tired and lazy of repeating the same thing
-const createMessage = (type, content) => {
-    return { type, content };
 };
 
 // Function to add books

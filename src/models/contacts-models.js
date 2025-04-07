@@ -1,5 +1,5 @@
-import pool from './index.js';
-import { createMessage } from './roles-utils.js';
+import pool from './index.js'; // Import pool from index.js
+import { createMessage } from '../utils/notif.js';
 
 // Function to create the contacts table
 export const createContactsTable = async () => {
@@ -100,16 +100,3 @@ export const deleteContactMessage = async (id) => {
         throw error;
     }
 };
-
-// Route to handle contact form submission
-app.post('/contact', async (req, res) => {
-    const { user_id, username, message } = req.body;
-    try {
-        const newMessage = await createContactMessage(user_id, username, message);
-        res.status(200).json({ message: 'Your message was sent successfully!', contactMessage: newMessage });
-    } catch (error) {
-        res.status(500).json({ error: 'An error occurred while sending your message.' });
-    }
-});
-
-

@@ -1,28 +1,20 @@
 <!-- make sure you change vairable names ERASE THIS ONLY AND ONLY AFTER YOU CREATED DB AND TRIPPLE CHECKED VARIABLE NAMES -->
 
-<main>
-    <section>
-        <h2>Welcome, <%= user.name %>!</h2>
-        <p>This is your dashboard. Here you can manage your activities and view updates.</p>
-    </section>
-    <section>
-        <h3>Checked Out Books</h3>
-        <ul>
-            <% checkedOutBooks.forEach(book => { %>
-                <li><%= book.title %> by <%= book.author %></li>
-            <% }) %>
-        </ul>
-    </section>
-    <section>
-        <h3>Past Books</h3>
-        <ul>
-            <% pastBooks.forEach(book => { %>
-                <li><%= book.title %> by <%= book.author %></li>
-            <% }) %>
-        </ul>
-    </section>
-    <section>
-        <h3>Bill</h3>
-        <p>Total Amount Due: $<%= bill.amountDue %></p>
-    </section>
-</main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Welcome to Your Dashboard</h1>
+    <h2>Your Reviews</h2>
+
+    <!-- Include the review partial -->
+    <%- include('partials/review') %>
+
+    <script src="/js/reviews.js"></script> <!-- Link to your JS -->
+</body>
+</html>

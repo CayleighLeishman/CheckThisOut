@@ -5,11 +5,24 @@
 <% if (success_mesg) { %>
     <div class="alert alert-success"><%= success_mesg %></div>
 <% } %>
-<script src="../utils/validator.js"></script> <!-- Make sure this path matches your public directory structure -->
+<script src="../utils/validation.js"></script> <!-- Make sure this path matches your public directory structure -->
 
 <div class="signup-container">
     <h1>Create an Account</h1>
-    <form action="/login" method="POST" onsubmit="return validatePasswords()">
+    <form action="/register" method="POST" onsubmit="return validatePasswords()">
+        <div class="form-group">
+            <label for="given_name">First Name:</label>
+            <input type="text" id="given_name" name="given_name" required>
+        </div>
+        <div class="form-group">
+            <label for="family_name">Last Name:</label>
+            <input type="text" id="family_name" name="family_name" required>
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+        <p>The email will be your username!</p>
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
@@ -23,7 +36,6 @@
             <input type="password" id="confirmPassword" name="confirmPassword" required>
         </div>
         <button type="submit">Sign Up</button>
-        <p>Your email will become your username!</p>
 
     </form>
 </div>

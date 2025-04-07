@@ -5,15 +5,18 @@ import express from "express";
 import dotenv from 'dotenv';
 import path from "path";
 import sessions from 'express-session';
+import pkg from 'pg';
 import { getNav } from './src/utils/index.js';
 import { fileURLToPath } from 'url';
 import configNodeEnv from './src/middleware/node-env.js';
 import fileUploads from './src/middleware/file-uploads.js';
 import homeRoute from './src/routes/index.js';
+import authRoutes from './src/routes/auth-routes.js';
+import contactRoutes from './src/routes/contact-routes.js';
 import bookRoutes from './src/routes/book-routes.js';
 import layouts from './src/middleware/layouts.js';
 import { configureStaticPaths } from './src/utils/index.js';
-import { testDatabase } from './src/models/index.js';
+import { setupDatabase, testDatabase } from './src/models/index.js';
 import flash from 'connect-flash'; 
 
 /**
@@ -23,6 +26,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const mode = process.env.NODE_ENV;
 const port = process.env.PORT;
+const { pool } = pkg; //Destructure to get the Pool constructor
 
 // Create and configure the Express server
 const app = express();
@@ -50,6 +54,9 @@ app.use(fileUploads);
 
 // Middleware to parse JSON data in request body
 app.use(express.json());
+
+//Middleware that sets up tables before handling routes
+await setupDatabase();
 
 // Middleware to parse URL-encoded form data (like from a standard HTML form)
 app.use(express.urlencoded({ extended: true }));
@@ -83,13 +90,13 @@ app.use('/', homeRoute);
 
 app.use('/books', bookRoutes);
 app.use('/books/:id', bookRoutes);
+app.use('/', authRoutes);
+app.use('/contacts', contactRoutes); 
 
 // gets the registeration page
 app.get('/register', (req, res) => {
     res.render('register'); // Make sure this file exists: views/register.ejs (or .html)
 });
-
-
 
 // Example global error handler in server.js (this should be right below your routes)
 app.use((err, req, res, next) => {
@@ -132,6 +139,8 @@ app.listen(port, async () => {
     await testDatabase(); //TO DO:: eplace this with the setup instead of test
     console.log(`Server running on http://127.0.0.1:${port}`);
 });
+
+
 
 console.log(`src/server.js : Node Environment: ${mode}`);
 //to do: 

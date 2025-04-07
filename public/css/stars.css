@@ -1,0 +1,31 @@
+/* public/css/styles.css */
+
+.star {
+    font-size: 30px;
+    cursor: pointer;
+    color: #ccc; /* Gray for empty stars */
+}
+
+.star.selected {
+    color: gold; /* Gold for selected stars */
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}

@@ -34,7 +34,7 @@ router.put('/users/:id', async (req, res) => {
     }
 });
 
-// ... (rest of user routes)
+// rest of user routes
 
 
 export default router;

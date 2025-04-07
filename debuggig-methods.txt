@@ -82,8 +82,39 @@ ADD CONSTRAINT unique_email UNIQUE (email);
 this adds constraight and changes the email to be unique vales so we dont accidetnally have the same email put in multiple times
 
 
+I'm now working on flash messages, I realized i can out it it as a partial so I'm going to see if i can get that to work
 
 
+I did a lot to debugg (basically jsut named wrong file for imports)
+
+Also I need to learn the difference between default exports and named exports
+
+So TO DO for me later! 
+
+I'm working on figuring out default exports and how to use it and that there's a correct and wrong way to import them.
+
+Still working on getting logging in rights.
+
+I also realized I have some repeated code so i'm trying to mimimize that. 
+
+
+added pnpm add express pg body-parser to package.json
+
+
+Removed professors comment  from models/index/**
+ * Instead of connecting to your pool with all the individual settings you can
+ * simplify the connection by using a connection string. Add this string to your
+ * .env file and us it here;we called ours `DB_URL`:
+ * 
+ * postgresql://username:password@host:port/database
+ * 
+ * You will need to replace the following values with your own:
+ * - username
+ * - password
+ * - host
+ * - port
+ * - database
+ */
 
 
 ___________

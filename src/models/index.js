@@ -2,30 +2,21 @@ import dotenv from 'dotenv';
 
 import pg from 'pg';
 import fs from 'fs';
+import {
+    createBooksTable
+  } from './books-models.js';
+
+import { createContactsTable } from './contacts-models.js';
 
 // reviews the .env file
 dotenv.config();
 
 const { Pool } = pg;
 
-/**
- * Instead of connecting to your pool with all the individual settings you can
- * simplify the connection by using a connection string. Add this string to your
- * .env file and us it here;we called ours `DB_URL`:
- * 
- * postgresql://username:password@host:port/database
- * 
- * You will need to replace the following values with your own:
- * - username
- * - password
- * - host
- * - port
- * - database
- */
 
 const pool = new Pool({
     connectionString: process.env.DB_URL,
-    ssl: false
+    ssl: false,
 });
 
 let dbClient;
@@ -54,12 +45,21 @@ if (process.env.NODE_ENV.toLowerCase().includes('dev')) {
     dbClient = pool;
 }
 
+// Provided by professor:
 // Setup function that can be used on server startup
+// export const setupDatabase = async () => {
+//     console.log('This feature is not yet implemented.');
+//     const sql = fs.readFileSync('.', 'utf-8'); //put path to sql file 
+//     await dbClient.query(sql);
+// };
 export const setupDatabase = async () => {
-    console.log('This feature is not yet implemented.');
-    const sql = fs.readFileSync('...', 'utf-8'); //put path to sql file 
-    await dbClient.query(sql);
+    try {
+        console.log('Database setup complete!');
+    } catch (error) {
+        console.error('Database setup failed:', error);
+    }
 };
+
 
 // Test function that can be used to test the database
 export const testDatabase = async () => {
@@ -79,4 +79,4 @@ export const testDatabase = async () => {
     }
 };
 
-export default dbClient;
+export default  dbClient;

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import argon2 from 'argon2'; // Import argon2
 const router = Router();
-
+ 
 /*******************************
  * Home Page          *
  *******************************/
@@ -18,31 +18,6 @@ router.get('/login', async (req, res) => {
     res.render('login', { title: 'Login Page' });
 });
 
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-
-    try {
-        const user = await User.findByEmail(email); // Fetch user from DB
-
-        if (!user) {
-            return res.status(401).send('User not found.');
-        }
-
-        const passwordMatch = await argon2.verify(user.password, password); // Use argon2.verify
-        if (!passwordMatch) {
-            return res.status(401).send('Incorrect password.');
-        }
-
-        // Store user info in session
-        req.session.user = { id: user.id, email: user.email };
-
-        res.redirect('/dashboard');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
 // logged out
 router.post('/logout', async (req, res) => {
     req.session.destroy(error => {
@@ -56,31 +31,14 @@ router.post('/logout', async (req, res) => {
 });
 
 /*******************************
- * Sign Up  /REGISTERATION     *
+ *          REGISTERATION     *
  *******************************/
+
+//see the registration page
 router.get('/register', async (req, res) => {
     res.render('register', { title: 'Signup Page' });
 });
 
-router.post('/register', async (req, res) => {
-    const { email, password } = req.body;
-
-    try {
-        // Hash password before saving
-        const hashedPassword = await argon2.hash(password);
-
-        // Save user to DB (replace with actual DB logic)
-        const newUser = await User.create({
-            email: email,
-            hash_pass: hashedPassword // Store hashed password in hash_pass column
-        });
-
-        res.redirect('/login');
-    } catch (error) {
-        console.error('Error during registration:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
 
 
 /*******************************

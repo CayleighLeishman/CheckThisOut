@@ -1,12 +1,12 @@
 import argon2 from 'argon2';
-import { pool } from '../models/index'; 
+import  pool from '../models/index.js'; 
 
 // =========================================================================== //
 //                                    Passwords                                 //
 // ===========================================================================//
 
 // Hashes a password using argon2
-const pass_hash = async (password) => {
+ export const pass_hash = async (password) => {
     return await argon2.hash(password); // Hash the password using argon2
 };
 

@@ -1,3 +1,4 @@
+//server side validation
 function validatePasswords() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;

@@ -116,7 +116,24 @@ Removed professors comment  from models/index/**
  * - database
  */
 
+I pushed to commit while it was still somewhat working
 
+installed 
+
+```pnpm
+pnpm install pg-format
+
+```
+thisis for 
+
+
+I FINALLY GO TIT TO THE DATABASE 
+
+FINALLY APEWJI SDAEFJKLSDFJASFK:d
+ 
+ One error was in the user-models I forgot to use "user" for the table names and so forth.
+
+ 
 ___________
 4.04.25
 

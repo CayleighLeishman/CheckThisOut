@@ -6,17 +6,19 @@ import dotenv from 'dotenv';
 import path from "path";
 import sessions from 'express-session';
 import pkg from 'pg';
+import cors from 'cors';
 import { getNav } from './src/utils/index.js';
 import { fileURLToPath } from 'url';
 import configNodeEnv from './src/middleware/node-env.js';
 import fileUploads from './src/middleware/file-uploads.js';
+import layouts from './src/middleware/layouts.js';
 import homeRoute from './src/routes/index.js';
 import authRoutes from './src/routes/auth-routes.js';
 import contactRoutes from './src/routes/contact-routes.js';
 import bookRoutes from './src/routes/book-routes.js';
-import layouts from './src/middleware/layouts.js';
 import { configureStaticPaths } from './src/utils/index.js';
 import { setupDatabase, testDatabase } from './src/models/index.js';
+import usersApiRoutes from './src/routes/api/user-api.js'
 import flash from 'connect-flash'; 
 
 /**
@@ -47,6 +49,8 @@ app.set('views', path.join(__dirname, 'src/views'));
 // Set Layouts middleware to automatically wrap views in a layout and configure default layout
 app.set('layout default', 'default');
 app.set('layouts', path.join(__dirname, 'src/views/layouts'));
+
+//
 app.use(layouts);
 
 // Middleware to process multipart form data with file uploads
@@ -55,11 +59,17 @@ app.use(fileUploads);
 // Middleware to parse JSON data in request body
 app.use(express.json());
 
-//Middleware that sets up tables before handling routes
-await setupDatabase();
+//
+app.use(cors());
+
+// Use API routes
+app.use('/api/users', usersApiRoutes);
 
 // Middleware to parse URL-encoded form data (like from a standard HTML form)
 app.use(express.urlencoded({ extended: true }));
+
+//Middleware that sets up tables before handling routes
+await setupDatabase();
 
 
 /**

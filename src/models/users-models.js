@@ -1,40 +1,42 @@
 import pool from './index.js';
+import format from 'pg-format';
 import { pass_hash, verifyPassword } from '../utils/auth.js';
 import { createMessage } from '../utils/notif.js';
 
-// Function to create the users table
+// Function to create the user table
 const createUsersTable = async () => {
     const query = `
-        CREATE TABLE IF NOT EXISTS users (
+        CREATE TABLE IF NOT EXISTS "user" (  // Quoted "user"
             id SERIAL PRIMARY KEY,
-            email VARCHAR(100) UNIQUE NOT NULL,
+            given_name VARCHAR(275),
+            family_name VARCHAR(275),
+            email VARCHAR(275) UNIQUE NOT NULL,
             hash_pass VARCHAR(255) NOT NULL,
-            given_name VARCHAR(100),
-            family_name VARCHAR(100),
             dob DATE,
             last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
     `;
     try {
         await pool.query(query);
-        const successMessage = createMessage('Users table created successfully or already exists! ', 'success');
+        const successMessage = createMessage('User table created successfully or already exists! ', 'success');
         console.log(successMessage.message);
     } catch (error) {
-        const errorMessage = createMessage('Uh-oh! There was an error creating the users table: ' + error.message, 'error');
+        const errorMessage = createMessage('Uh-oh! There was an error creating the user table: ' + error.message, 'error');
         console.error(errorMessage.message);
         throw error;
     }
 };
 
-// Function to add a new user 
+// Function to add a new user
 const createUser = async (email, password, given_name, family_name, dob) => {
     try {
+        const hashedPassword = await pass_hash(password);
         const query = format(
-            'INSERT INTO users (email, hash_pass, given_name, family_name, dob) VALUES (%L, %L, %L, %L, %L) RETURNING *',
-            email,
-            password,
+            'INSERT INTO "user" (given_name, family_name, email, hash_pass, dob) VALUES (%L, %L, %L, %L, %L) RETURNING *', // Quoted "user"
             given_name,
             family_name,
+            email,
+            hashedPassword,
             dob
         );
         const res = await pool.query(query);
@@ -47,7 +49,7 @@ const createUser = async (email, password, given_name, family_name, dob) => {
 
 // Function to get all users
 const getAllUsers = async () => {
-    const query = 'SELECT id, email, given_name, family_name, dob';
+    const query = 'SELECT id, email, given_name, family_name, dob FROM "user"'; // Quoted "user"
     try {
         const res = await pool.query(query);
         const successMessage = createMessage('Users fetched successfully! ', 'success');
@@ -62,7 +64,7 @@ const getAllUsers = async () => {
 
 // Function to get a user by ID
 const getUserById = async (id) => {
-    const query = 'SELECT id, email, given_name, family_name, dob';
+    const query = 'SELECT id, email, given_name, family_name, dob FROM "user"'; // Quoted "user"
     const values = [id];
     try {
         const res = await pool.query(query, values);
@@ -83,22 +85,22 @@ const getUserById = async (id) => {
 
 // Function to update a user
 const updateUser = async (id, email, given_name, family_name, dob) => {
-    try{
+    try {
         const query = format(
-            'UPDATE users SET email = %L, given_name = %L, family_name = %L, dob = %L WHERE id = %L RETURNING *',
+            'UPDATE "user" SET email = %L, given_name = %L, family_name = %L, dob = %L WHERE id = %L RETURNING *', // Quoted "user"
             email, given_name, family_name, dob, id
         );
         const res = await pool.query(query);
-        return res.rows[0]
+        return res.rows[0];
     } catch (error) {
         console.error('Error updating user:', error);
         throw error;
     }
-}
+};
 
 // Function to delete a user
 const deleteUser = async (id) => {
-    const query = 'DELETE FROM users WHERE id = $1 RETURNING *';
+    const query = 'DELETE FROM "user" WHERE id = $1 RETURNING *'; // Quoted "user"
     const values = [id];
     try {
         const res = await pool.query(query, values);
@@ -126,7 +128,7 @@ const validateAndUpdateDob = async (id, dob) => {
         throw new Error('Invalid date of birth');
     }
 
-    const query = 'UPDATE users SET dob = $1 WHERE id = $2 RETURNING *';
+    const query = 'UPDATE "user" SET dob = $1 WHERE id = $2 RETURNING *'; // Quoted "user"
     const values = [dob, id];
     try {
         const res = await pool.query(query, values);
@@ -143,11 +145,11 @@ const validateAndUpdateDob = async (id, dob) => {
 // Update last logged in time
 const updateLastLoggedIn = async (userId) => {
     const query = `
-        UPDATE users
+        UPDATE "user"
         SET last_login = NOW()
         WHERE id = $1
         RETURNING *
-    `;
+    `; // Quoted "user"
     const values = [userId];
     try {
         const res = await pool.query(query, values);
@@ -159,21 +161,10 @@ const updateLastLoggedIn = async (userId) => {
     }
 };
 
-// Password hashing and verification
-const verifyUserPassword = async (email, password) => {
-    const user = await getUserByEmail(email);
-    if (user && await verifyPassword(password, user.hash_pass)) {
-        return user; // Authentication successful
-    } else {
-        throw new Error('Invalid email or password');
-    }
-};
-
-
 // Function to retrieve a user from the database by their email address
 const getUserByEmail = async (email) => {
-    const query = 'SELECT id, email, password, given_name, family_name, dob';
-    const values = [email];
+    const query = 'SELECT id, email, hash_pass, given_name, family_name, dob FROM "user" WHERE email = $1'; // Added WHERE clause with $1
+    const values = [email]; // Provide the 'email' value as a parameter
     try {
         const res = await pool.query(query, values);
         if (!res.rows.length) {
@@ -185,6 +176,16 @@ const getUserByEmail = async (email) => {
     } catch (error) {
         console.error('Something went wrong! Error fetching user: ' + error.message, 'error');
         throw error;
+    }
+};
+
+// Password hashing and verification
+const verifyUserPassword = async (email, password) => {
+    const user = await getUserByEmail(email);
+    if (user && await verifyPassword(password, user.hash_pass)) {
+        return user; // Authentication successful
+    } else {
+        throw new Error('Invalid email or password');
     }
 };
 

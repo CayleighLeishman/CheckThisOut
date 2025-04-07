@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import { getGenres } from '../models/genre-models.js';
 
 /** @type {Array<{route: string, dir: string}|string>} Static path configurations */
 const staticPaths = [
@@ -48,18 +49,60 @@ const configureStaticPaths = (app) => {
  * @returns {string} The navigation menu.
  */
 
-const getNav = () => {
-    return `<nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/genre"></a>Genre</li> 
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-    </nav>`;
+const getNav = async (user) => {
+    try {
+        console.log("getNav called");
+        const genre = await getGenres(); // Fetch genres into 'genre'
+        console.log('src/utils/index.js line 62: genre:', genre);
+
+        let nav = '<nav><ul>';
+
+        if (genre && genre.length > 0) {
+            genre.forEach(genreItem => { // Use 'genreItem' or 'genre' as the parameter. I will use genreItem to prevent confusion.
+                nav += `<li><a href="/genre/${genreItem.id}">${genreItem.genre_name}</a></li>`;
+            });
+        }
+
+        if (user) {
+            nav += `<li><a href="/">Home</a></li>
+                    <li>
+                        <form action="/logout" method="POST" style="display: inline;">
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul></nav>`;
+        } else {
+            nav += `<li><a href="/">Home</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Sign Up</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul></nav>`;
+        }
+
+
+
+        console.log('src/utils/index.js line 85: nav:', nav);
+        return nav;
+    } catch (error) {
+        console.error('Error in getNav:', error);
+        return '<nav><ul><li>Error generating navigation</li></ul></nav>';
+    }
 };
+// const getNav = () => {
+//     return `<nav>
+//         <ul>
+//             <li><a href="/">Home</a></li>
+//             <li><a href="/login">Login</a></li>
+//             <li><a href="/profile">Profile</a></li>
+//             <li><a href="/dashboard">Dashboard</a></li>
+//             <li><a href="/genre"></a>Genre</li> 
+//             <li><a href="/contact">Contact</a></li>
+//         </ul>
+//     </nav>`;
+// };
     // When you implement the Database, uncomment this code
 // const genre = await getGenres();
 // }

@@ -1,0 +1,33 @@
+@import url('/colors.css'); /* Importing colors.css for color variables */
+
+
+.alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: var(--black);
+    background-color: var(--success);
+    border-color: var(--orangish-red)
+}
+
+.alert-danger {
+    color: var(--black);
+    background-color: var(--alert);
+    border-color: var(--alert);
+}
+
+.alert-warning {
+    color: var(--black);
+    background-color: var(--alert);
+    border-color: var(--orangish-red);
+}
+
+.alert-info {
+    color: var(--black);
+    background-color: var(--orangish-red);
+    border-color: var(--teal);
+}

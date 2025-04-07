@@ -31,6 +31,7 @@ const createUsersTable = async () => {
 const createUser = async (email, password, given_name, family_name, dob) => {
     try {
         const hashedPassword = await pass_hash(password);
+        console.log("hased Password BEfore Database insertion:", hashedPassword)
         const query = format(
             'INSERT INTO "user" (given_name, family_name, email, hash_pass, dob) VALUES (%L, %L, %L, %L, %L) RETURNING *', // Quoted "user"
             given_name,
@@ -163,18 +164,19 @@ const updateLastLoggedIn = async (userId) => {
 
 // Function to retrieve a user from the database by their email address
 const getUserByEmail = async (email) => {
-    const query = 'SELECT id, email, hash_pass, given_name, family_name, dob FROM "user" WHERE email = $1'; // Added WHERE clause with $1
-    const values = [email]; // Provide the 'email' value as a parameter
+    const query = 'SELECT id, email, hash_pass, given_name, family_name, dob FROM "user" WHERE email = $1';
+    const values = [email];
     try {
+        console.log('getUserByEmail query:', query, values);
         const res = await pool.query(query, values);
+        console.log('getUserByEmail result:', res.rows);
         if (!res.rows.length) {
-            console.log('Uh-oh! We couldn’t find that Username. Try again!', 'error');
+            console.log('User not found in database.');
             return null;
         }
-        console.log(('src/models/users-models: User fetched successfully! ', 'success'));
-        return res.rows[0]; // Returning the user details
+        return res.rows[0];
     } catch (error) {
-        console.error('Something went wrong! Error fetching user: ' + error.message, 'error');
+        console.error('Error in getUserByEmail:', error);
         throw error;
     }
 };

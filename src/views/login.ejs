@@ -1,33 +1,49 @@
-<!-- Flash messages -->
-<% if (error_mesg) { %>
-    <div class="alert alert-danger"><%= error_mesg %></div>
-  <% } %>
-  
-  <% if (success_mesg) { %>
-    <div class="alert alert-success"><%= success_mesg %></div>
-<% } %>
-  
-<body>
-  <div class="login-container">
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <div class="form-group">
-        <button type="submit">Login</button>
-      </div>
-    </form>
-    <div class="form-group">
-      <!-- to do :  make into button
-       *  <button type="submit" href="/register" class="register-link">Register here</button>
-      -->
-       <a href="/register" class="register-link">Don't have an account? Register here</a>
-    </div>
+<% if (error) { %>
+  <div class="alert alert-danger session-flash-alert">
+      <%= error %>
   </div>
-</body>
+<% } %>
+
+<% if (success) { %>
+  <div class="alert alert-success session-flash-alert">
+      <%= success %>
+  </div>
+<% } %>
+
+<div class="login-container">
+  <h1>Login</h1>
+  <form action="/login" method="POST">
+      <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <div style="position: relative;">
+              <input type="password" id="password" name="password" required>
+              <button type="button" id="showPassword" style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%);">Show</button>
+          </div>
+      </div>
+      <div class="form-group">
+          <button type="submit">Login</button>
+      </div>
+  </form>
+  <div class="form-group">
+      <a href="/register" class="register-link">Don't have an account? Register here</a>
+  </div>
+</div>
+
+<script>
+  const passwordInput = document.getElementById('password');
+  const showPasswordButton = document.getElementById('showPassword');
+
+  showPasswordButton.addEventListener('click', function() {
+      if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          showPasswordButton.textContent = 'Hide';
+      } else {
+          passwordInput.type = 'password';
+          showPasswordButton.textContent = 'Show';
+      }
+  });
+</script>

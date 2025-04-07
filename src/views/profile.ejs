@@ -1,5 +1,17 @@
 <!-- make sure you change vairable names ERASE THIS ONLY AND ONLY AFTER YOU CREATED DB AND TRIPPLE CHECKED VARIABLE NAMES -->
- 
+<% if (session.error) { %>
+    <div class="alert alert-danger session-flash-alert">
+        <%= session.error %>
+    </div>
+    <% delete session.error; %>
+  <% } %>
+  
+  <% if (session.success) { %>
+    <div class="alert alert-success session-flash-alert">
+        <%= session.success %>
+    </div>
+    <% delete session.success; %>
+  <% } %>
 <!DOCTYPE html>
 <html lang="en">
 <body>

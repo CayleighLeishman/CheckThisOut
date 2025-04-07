@@ -3,54 +3,135 @@
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/*            Contacts                       */
+/* Contacts                                  */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-/* Styles for organizing textboxes in the contact view */
 .contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 500px;
-  margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1rem; /* Added padding for all screens */
 }
 
 .contact-form label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
 .contact-form textarea {
-  resize: vertical;
-  min-height: 100px;
+    resize: vertical;
+    min-height: 100px;
 }
 
 .contact-form button {
-  padding: 0.75rem 1.5rem;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    padding: 0.75rem 1.5rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .contact-form button:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
+}
+
+/* header */
+header{
+    position: flex;
+}
+
+header.nav-open{
+    margin-bottom: 200px; /* Adjust as needed */
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 600px) {
+    .contact-form {
+        max-width: 100%; /* Form takes full width on smaller screens */
+        padding: 1rem; /* Ensure padding on small screens */
+    }
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* messages                                  */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.error-message,
+.success-message {
+    padding: 1rem; /* Added padding for all screens */
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.error-message {
+    background-color: var(--orangish-red);
+    border: 1px solid var(--orangish-red);
+    color: var(--white);
+}
+
+.success-message {
+    background-color: var(--success);
+    border: 1px solid var(--success);
+    color: var(--white);
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Hamburger Menu (responsive design),       */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+#hamburger-button {
+    display: none; /* Hidden on larger screens */
+}
+.nav-container {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem;
+}
+
+/* Default state: nav hidden on small screens */
+@media (max-width: 600px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        /*width: 100%;
+        background-color: white;*/
+        padding: 1rem; 
+        z-index: 100;
+    }
+
+    nav ul.open {
+        display: flex;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #hamburger-button {
+        display: block;
+        margin-top: 10px;
+    }
 }

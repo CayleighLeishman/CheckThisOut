@@ -1,3 +1,6 @@
+import session from "express-session";
+
+
 // Helper function to generate messages
 export const createMessage = (type = 'info', content) => {
     // Predefined message types with playful responses
@@ -39,3 +42,14 @@ export const createMessage = (type = 'info', content) => {
 //  as of April 6 used in
 //src/models/Users-models.js
 //src/models/contacts-models.js
+
+ // Function to create a flash message response
+export const flashMessage = (status, content) => {
+    return {
+        status: status, // Can be 'success' or 'error'
+        message: content
+    };
+};
+
+//used in src/model/genre
+//genre-model

@@ -3,7 +3,7 @@ import {
     createUser, 
     getAllUsers, 
     getUserById, 
-    getUserByUsername,
+    getUserByEamil,
     updateUser, 
     deleteUser, 
 } from '../models/users-models.js';

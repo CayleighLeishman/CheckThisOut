@@ -133,7 +133,39 @@ FINALLY APEWJI SDAEFJKLSDFJASFK:d
  
  One error was in the user-models I forgot to use "user" for the table names and so forth.
 
- 
+ I'm fixing up auth-routes:
+
+
+Removed Duplicate Routes: I've removed the duplicate router.post('/register', ...) and router.post('/logout', ...) definitions.
+Logout Route:
+The logout route uses req.session.destroy() to destroy the user's session.
+It handles potential errors during session destruction.
+It redirects the user to the login page after successful logout.
+
+I forgot to implement the logout buttin (i feel like that upside down smile emoji.) its fine, but dang it
+
+
+one debugging problem i ahd was the computer couldn't find a file, but the file was int he right place and i copied and pasted it over and even checked 
+to copy the file link and it was there. Turns out one of the imported files had uncompleted import statements. So for some reason even though it found the 
+file, it kep tthinking it couldnt find it.
+
+
+on the Navigation I'm getting placeholders instead
+
+soo the nav instead of 
+fiction   nonfiction   home    login 
+
+its displaying 
+
+<%= genreItem.genre_name %> <%= genreItem.genre_name %>  Home  Login  Sign Up  Contact
+
+added css for flashmessage 
+
+I played around with the navigation s that i could get genres titles working properly
+now it disp;ays:
+
+fiction nonfiction Home Login  Sign Up Contact
+
 ___________
 4.04.25
 

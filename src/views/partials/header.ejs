@@ -1,7 +1,31 @@
-<div id="logo">
-    <h1>Student Library</h1>
-    <a href="/">
-        <img src="/images/studentLibrary.webp" alt="Site Logo">
-    </a>
-</div>
-<%- navHTML %>
+<header>
+    <!-- <script defer src="/js/hamburger-menu.js"></script> -->
+
+    <div id="logo">
+      <h1>Student Library</h1>
+      <a href="/"><img src="/images/studentLibrary.webp" alt="Site Logo"></a>
+    </div>
+  
+    <div class="nav-container">
+      <button id="hamburger-button" aria-label="Toggle navigation menu">☰</button>
+      <nav>
+        <%- navHTML %>
+      </nav>
+    </div>
+  
+  </header>
+<script>
+  // Hamburger Menu
+document.addEventListener('DOMContentLoaded', () => {
+    const menuButton = document.getElementById("hamburger-button");
+    const navList = document.querySelector("nav ul");
+
+    if (menuButton && navList) {
+        menuButton.addEventListener('click', () => {
+            navList.classList.toggle("open");
+        });
+    } else {
+        console.error("Hamburger button or nav list not found.");
+    }
+});
+</script>

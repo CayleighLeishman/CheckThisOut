@@ -1,19 +1,13 @@
 import pool from './index.js';
+import { flashMessage } from '../utils/notif.js'
 
-// Function to create a flash message response
-const flashMessage = (status, content) => {
-    return {
-        status: status, // Can be 'success' or 'error'
-        message: content
-    };
-};
 
 // Function to create the genres table
 export const createGenresTable = async () => {
     const query = `
         CREATE TABLE IF NOT EXISTS genres (
             id SERIAL PRIMARY KEY,
-            genre_name VARCHAR(100) UNIQUE NOT NULL
+            genre_name VARCHAR(150) UNIQUE NOT NULL
         )
     `;
     try {

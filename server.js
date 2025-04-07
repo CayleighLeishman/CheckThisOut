@@ -79,23 +79,24 @@ app.use(sessions({
     secret: process.env.SESSION_SECRET || 'in_sessions_something_is_wrong_', 
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false} //this for testing
+    cookie: { secure: 'auto'} 
 }));
 
 //middleware to add flash after session middleware 
 app.use(flash());
 
+//middleware to make flash messages avail in templates
 app.use((req, res, next) => {
-    res.locals.success_mesg = req.flash('success_mesg');
-    res.locals.error_mesg = req.flash('error_mesg');
+    res.locals.flash = req.flash();
     next();
 });
+
 // Middleware to serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
 /**
  * Routes
-//  */
+ */
 app.use('/', homeRoute);
 
 app.use('/books', bookRoutes);
@@ -105,7 +106,7 @@ app.use('/contacts', contactRoutes);
 
 // gets the registeration page
 app.get('/register', (req, res) => {
-    res.render('register'); // Make sure this file exists: views/register.ejs (or .html)
+    res.render('register'); 
 });
 
 // Example global error handler in server.js (this should be right below your routes)
@@ -138,9 +139,10 @@ if (mode.includes('dev')) {
         console.error('Failed to start WebSocket server:', error);
     }
 }
+
 //get the nav for the current request and make it available in res.locals
 app.use((req, res, next) => {
-    res.locals.nav = getNav(req);
+    res.locals.nav = getNav(req.session.user);
     next();
 });
 
@@ -152,13 +154,10 @@ app.listen(port, async () => {
 
 
 
-console.log(`src/server.js : Node Environment: ${mode}`);
+// console.log(`src/server.js : Node Environment: ${mode}`);
 //to do: 
 //add books on frontend
-// you're missing sessiosn hook that up in server.js
 
-//simplify passwords if bcrypt is hard
-//dont use mdfive 
 //get it running on render 
 //on teams there's a link for "force connect with github 
 // //new /web service 

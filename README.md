@@ -2,14 +2,22 @@
 /cascade-cayos
 │
 ├── index.html             # Main landing page
+
 ├── /styles                # All CSS files
+
 │
 ├── /topics                # Folder for each CSS topic (component-based)
+
 │   ├── architecture.html  # CSS architecture explanation
+
 │   ├── components.html    # Reusable design pieces
+
 │   ├── bem.html           # Naming conventions
+
 │   ├── responsiveness.html # Media queries, mobile-first approach
+
 │   └── ...more as needed
+
 │
 └── README.md              # Project documentation (this file)
 

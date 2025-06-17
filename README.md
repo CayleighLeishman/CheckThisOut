@@ -1,35 +1,58 @@
+ ## Folder Structure
+/cascade-cayos
+│
+├── index.html             # Main landing page
+├── /styles                # All CSS files
+│
+├── /topics                # Folder for each CSS topic (component-based)
+│   ├── architecture.html  # CSS architecture explanation
+│   ├── components.html    # Reusable design pieces
+│   ├── bem.html           # Naming conventions
+│   ├── responsiveness.html # Media queries, mobile-first approach
+│   └── ...more as needed
+│
+└── README.md              # Project documentation (this file)
 
-## Start the Express Server
+ Tools and Concepts Used
+CSS Grid & Flexbox for layout
 
-With the packages installed you're ready to run the initial test.
-1. If the VSC terminal is still open use it. If it is closed, open it again using the same command as before.
+Media Queries for responsive design
 
-2. Type the following command, then press Enter:
+BEM (Block, Element, Modifier) naming convention
 
-    pnpm run dev
+Reusable Components for cleaner structure
+
+Semantic HTML for clarity and accessibility
+
+Custom Code Styling for learning emphasis
+
+## How I’m Using It
+Each topic page includes:
+
+A friendly explanation of the concept
+
+Visual structure using .post, .article, and .grey-box
+
+Code examples styled for readability
+
+Notes written in my own words to reinforce understanding
+
+##  What I’ve Learned So Far
+- How to build a reusable layout system using Grid
+
+- How components make styling and content maintenance easier
+
+- How to apply BEM to stay organized
+
+- How breaking things down clearly helps my future self avoid relearning from scratch
+
+## Future Ideas
+Add more topics (e.g., specificity, z-index, animation, etc.)
+
+Create a search or filter feature
+
+Include interactive code examples or demos
 
 
-___
-3. If the command works, you should see the message "app listening on localhost:5500" in the console.
-
-4. Open the package.json file.
-
-5. Note the "Scripts" area? There is a line with the name of "dev", which tells the nodemon package to run the server.js file.
-6. This is the command you just ran.
-
-7. Open the server.js file.
-
-8. Near the bottom you'll see two variables "Port" and "Host". The values for the variables are stored in the .env file.
-
-9. These variables are used when the server starts on your local machine.
-
-## Move the demo file
-When you installed Git and cloned the remote repository in week 1, you should have created a simple web page.
-1. Find and move that simple web page to the public folder. Be sure to note its name.
-
-
-## Test in a browser
-
-1. Go to http://localhost:5500 in a browser tab. Nothing should be visible as the server has not been setup to repond to that route.
-2. Add "/filename.html" to the end of the URL (replacing filename with the name of the file you moved to the public folder).
-3. You should see that page in the browser.
+##  Final Thoughts
+I built Cascade Cayos as a personal CSS reference tool. It's a small project with a big goal: to make learning stick by writing for myself, in my own language, with the structure I need to grow. If I forget something later, I know exactly where to look.
